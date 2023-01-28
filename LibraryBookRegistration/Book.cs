@@ -12,7 +12,7 @@ namespace LibraryBookRegistration
     public class Book
     {
         /// <summary>
-        /// 
+        /// Creates a Book with given ISBN, Title, Price
         /// </summary>
         /// <param name="isbn">Given ISBN</param>
         /// <param name="title">Given Title</param>
