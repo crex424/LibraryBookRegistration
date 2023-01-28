@@ -13,6 +13,21 @@ namespace LibraryBookRegistration
     public class Customer
     {
         /// <summary>
+        /// Creates a customer
+        /// </summary>
+        /// <param name="title">Customers title</param>
+        /// <param name="fName">Customers legal first name</param>
+        /// <param name="lName">Customers legal last name</param>
+        /// <param name="dob">Customers legal date of birth</param>
+        public Customer(string title, string fName, string lName, DateTime dob)
+        {
+            Title = title;
+            FirstName = fName;
+            LastName = lName;
+            DateOfBirth = dob;
+        }
+
+        /// <summary>
         /// The customers ID
         /// </summary>
         public int CustomerID { get; set; }
@@ -32,20 +47,7 @@ namespace LibraryBookRegistration
         /// The customers legal date of birth
         /// </summary>
         public DateTime DateOfBirth { get; set; }
-        /// <summary>
-        /// Creates a customer
-        /// </summary>
-        /// <param name="title">Customers title</param>
-        /// <param name="fName">Customers legal first name</param>
-        /// <param name="lName">Customers legal last name</param>
-        /// <param name="dob">Customers legal date of birth</param>
-        public Customer(string title, string fName, string lName, DateTime dob)
-        {
-            Title = title;
-            FirstName = fName;
-            LastName = lName;
-            DateOfBirth = dob;
-        }
+
         /// <summary>
         /// The users formatted full name. ex.(LastName, FirstName)
         /// </summary>
