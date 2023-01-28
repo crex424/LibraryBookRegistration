@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LibraryBookRegistration
 {
     /// <summary>
-    /// Represents a customer
+    /// Represents a Book
     /// </summary>
     public class Book
     {
