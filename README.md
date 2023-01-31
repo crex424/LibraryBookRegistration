@@ -8,3 +8,22 @@
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/crex424/LibraryBookRegistration?style=plastic)
 ![GitHub last commit](https://img.shields.io/github/last-commit/crex424/LibraryBookRegistration?style=plastic)
+
+## The Repository
+___Library Book Registration___
+
+Quarter: Winter 2023
+
+Class: Advanced .NET Programming
+
+Instructor: [Joseph Ortiz](https://github.com/JoeProgrammer88)
+
+### Description
+This project repository is to gain knowledge, skills and experience of working in a team with Source Control
+
+### Contributors
+[Campbell Rex](https://github.com/crex424)
+
+[Tung Kim](https://github.com/TungKimProgrammer)
+
+### 
