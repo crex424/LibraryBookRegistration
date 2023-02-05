@@ -38,5 +38,14 @@ namespace LibraryBookRegistration
         /// Registration date
         /// </summary>
         public DateTime RegDate { get; set; }
+
+        /// <summary>
+        /// Overrides ToString() class to display information of a Registration
+        /// </summary>
+        /// <returns>Customer's Full Name + Book Title + Registration Date</returns>
+        public override string ToString()
+        {
+            return CustomerDB.GetCustomer(CustomerID).FullName + " - " + BookDB.GetBook(ISBN).Title + " - " + RegDate.ToShortDateString();
+        }
     }
 }
