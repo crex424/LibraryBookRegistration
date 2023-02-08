@@ -18,5 +18,14 @@ namespace LibraryBookRegistration
         {
             return text.Trim();
         }
+        /// <summary>
+        /// Removes all white space from string
+        /// </summary>
+        /// <param name="text">the string to have white space removed</param>
+        /// <returns>A string with all white space removed</returns>
+        public static string RemoveAllWhiteSpace(string text)
+        {
+            return Regex.Replace(text, " ", "");
+        }
     }
 }
