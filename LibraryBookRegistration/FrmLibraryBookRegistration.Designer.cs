@@ -85,7 +85,7 @@
             this.btnManageRegistration.Name = "btnManageRegistration";
             this.btnManageRegistration.Size = new System.Drawing.Size(153, 36);
             this.btnManageRegistration.TabIndex = 7;
-            this.btnManageRegistration.Text = "&Manage Registration";
+            this.btnManageRegistration.Text = "&Manage Registrations";
             this.btnManageRegistration.UseVisualStyleBackColor = true;
             // 
             // btnManageBook
@@ -94,7 +94,7 @@
             this.btnManageBook.Name = "btnManageBook";
             this.btnManageBook.Size = new System.Drawing.Size(153, 36);
             this.btnManageBook.TabIndex = 6;
-            this.btnManageBook.Text = "Manage &Book";
+            this.btnManageBook.Text = "Manage &Books";
             this.btnManageBook.UseVisualStyleBackColor = true;
             // 
             // btnManageCustomer
@@ -103,7 +103,7 @@
             this.btnManageCustomer.Name = "btnManageCustomer";
             this.btnManageCustomer.Size = new System.Drawing.Size(153, 36);
             this.btnManageCustomer.TabIndex = 5;
-            this.btnManageCustomer.Text = "Manage &Customer";
+            this.btnManageCustomer.Text = "Manage &Customers";
             this.btnManageCustomer.UseVisualStyleBackColor = true;
             // 
             // lblLibraryBookRegistration
