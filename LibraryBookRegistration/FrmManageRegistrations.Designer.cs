@@ -130,7 +130,7 @@
             this.btnReturnToMainForm.Location = new System.Drawing.Point(14, 18);
             this.btnReturnToMainForm.Name = "btnReturnToMainForm";
             this.btnReturnToMainForm.Size = new System.Drawing.Size(154, 23);
-            this.btnReturnToMainForm.TabIndex = 4;
+            this.btnReturnToMainForm.TabIndex = 6;
             this.btnReturnToMainForm.Text = "← Return to &Main Form";
             this.btnReturnToMainForm.UseVisualStyleBackColor = true;
             // 
