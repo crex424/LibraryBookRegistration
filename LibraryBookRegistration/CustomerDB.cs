@@ -76,5 +76,14 @@ namespace LibraryBookRegistration
                 throw new ArgumentException("A Customer with that Id does not exist!");
             }
         }
+        /// <summary>
+        /// Deletes a book
+        /// </summary>
+        /// <param name="c">The Customer to be deleted</param>
+        /// <exception cref="SqlException">Thrown for SQL problem</exception>
+        public static void Delete(Customer c)
+        {
+            Delete(c.CustomerID);
+        }
     }
 }
