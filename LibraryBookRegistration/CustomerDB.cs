@@ -12,6 +12,10 @@ namespace LibraryBookRegistration
     /// </summary>
     public class CustomerDB
     {
+        /// <summary>
+        /// Adds a Customer to the database
+        /// </summary>
+        /// <param name="c">The Customer to be added</param>
         public static void Add(Customer c)
         {
             // establish connection to database
