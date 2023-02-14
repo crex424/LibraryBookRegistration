@@ -27,7 +27,7 @@ namespace LibraryBookRegistration
             insertCmd.Connection = con;
             // Parameterize query
             insertCmd.CommandText = "INSERT INTO Customer(DateOfBirth, FirstName, LastName, Title) " +
-                                              "VALUES (@dob, @firstName, @lastName, @title)";
+                                              "VALUES (@dob, @fName, @lName, @title)";
             insertCmd.Parameters.AddWithValue("@dob", c.DateOfBirth);
             insertCmd.Parameters.AddWithValue("@fName", c.FirstName);
             insertCmd.Parameters.AddWithValue("@lName", c.LastName);
@@ -56,13 +56,13 @@ namespace LibraryBookRegistration
             // parameterize query
             updateCmd.CommandText = "UPDATE Customer " +
                                     "SET DateOfBirth = @dob " +
-                                    " , FirstName = @firstName " +
-                                    " , LastName = @lastName " +
+                                    " , FirstName = @fName " +
+                                    " , LastName = @lName " +
                                     " , Title = @title " +
                                     "WHERE CustomerID = @customerId";
             updateCmd.Parameters.AddWithValue("@dob", c.DateOfBirth);
-            updateCmd.Parameters.AddWithValue("@firstName", c.FirstName);
-            updateCmd.Parameters.AddWithValue("@lastName", c.LastName);
+            updateCmd.Parameters.AddWithValue("@fName", c.FirstName);
+            updateCmd.Parameters.AddWithValue("@lName", c.LastName);
             updateCmd.Parameters.AddWithValue("@title", c.Title);
             updateCmd.Parameters.AddWithValue("@customerId", c.CustomerID);
 
@@ -151,6 +151,47 @@ namespace LibraryBookRegistration
 
             // Return customer
             return currentCustomer;
+        }
+
+        /// <summary>
+        /// Gets a list of all customers ordered by last name in
+        /// ascending order
+        /// </summary>
+        /// <returns>a list of all customers ordered by last name in
+        /// ascending order</returns>
+        public static List<Customer> GetAllCustomers()
+        {
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection();
+
+            // Prepare Query
+            SqlCommand selCmd = new SqlCommand();
+            selCmd.Connection = con;
+            selCmd.CommandText = "SELECT CustomerID, DateOfBirth, FirstName, LastName, Title " +
+                "FROM Customer " +
+                "ORDER BY LastName";
+
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selCmd.ExecuteReader();
+
+            List<Customer> customers = new List<Customer>();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["CustomerID"]);
+                string fName = reader["FirstName"].ToString();
+                string lName = reader["LastName"].ToString();
+                string title = reader["Title"].ToString();
+                DateTime dob = Convert.ToDateTime(reader["DateOfBirth"]);
+                Customer tempCustomer = new Customer(title, fName, lName, dob);
+                tempCustomer.CustomerID = id;
+
+                customers.Add(tempCustomer);
+            }
+
+            // return customers
+            return customers;
         }
     }
 }
