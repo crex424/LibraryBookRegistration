@@ -15,7 +15,7 @@ namespace LibraryBookRegistration
         public static void Add(Customer c)
         {
             // establish connection to database
-            SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
 
             // prepare insert statement
             SqlCommand insertCmd = new SqlCommand();
@@ -33,9 +33,6 @@ namespace LibraryBookRegistration
 
             // execute insert query
             insertCmd.ExecuteNonQuery();
-
-            // close connection to the database
-            con.Close();
         }
     }
 }
