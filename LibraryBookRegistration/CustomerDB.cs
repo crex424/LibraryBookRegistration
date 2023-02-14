@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,37 @@ namespace LibraryBookRegistration
 
             // execute insert query
             insertCmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Updates a Customer
+        /// </summary>
+        /// <param name="c">Customer to be updated</param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void Update(Customer c)
+        {
+            // establish connection to database
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // prepare insert statement
+            SqlCommand updateCmd = new SqlCommand();
+            updateCmd.Connection = con;
+            // parameterize query
+            updateCmd.CommandText = "UPDATE Customer " +
+                                    "SET DateOfBirth = @dob " +
+                                    " , FirstName = @firstName " +
+                                    " , LastName = @lastName " +
+                                    " , Title = @title";
+            updateCmd.Parameters.AddWithValue("@dob", c.DateOfBirth);
+            updateCmd.Parameters.AddWithValue("@firstName", c.FirstName);
+            updateCmd.Parameters.AddWithValue("@lastName", c.LastName);
+            updateCmd.Parameters.AddWithValue("@title", c.Title);
+
+            // open connection to the database
+            con.Open();
+
+            // execute query
+            updateCmd.ExecuteNonQuery();
         }
     }
 }
