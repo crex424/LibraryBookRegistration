@@ -77,7 +77,7 @@ namespace LibraryBookRegistration
             }
         }
         /// <summary>
-        /// Deletes a book
+        /// Deletes a Customer
         /// </summary>
         /// <param name="c">The Customer to be deleted</param>
         /// <exception cref="SqlException">Thrown for SQL problem</exception>
@@ -88,6 +88,33 @@ namespace LibraryBookRegistration
                 throw new ArgumentException("The CustomerID must be populated!");
             }
             Delete(c.CustomerID);
+        }
+        /// <summary>
+        /// Deletes a Customer using their ID
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <exception cref="ArgumentException">Thrown if Customer does not exist</exception>
+        /// <exception cref="SqlException">Thrown for SQL problem</exception>
+        public static void Delete(int customerID)
+        {
+            // use "using" statement to close connection automatically
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            SqlCommand deleteCmd = new SqlCommand();
+            deleteCmd.Connection = con;
+            deleteCmd.CommandText = "DELETE FROM Customer " +
+                                    "WHERE CustomerID = @customerID ";
+            deleteCmd.Parameters.AddWithValue("@customerID", customerID);
+
+            // Open connection to the database
+            con.Open();
+
+            // Execute query
+            int rows = deleteCmd.ExecuteNonQuery();
+            if (rows == 0)
+            {
+                throw new ArgumentException("A customer with that id does not exist!");
+            }
         }
     }
 }
