@@ -58,11 +58,13 @@ namespace LibraryBookRegistration
                                     "SET DateOfBirth = @dob " +
                                     " , FirstName = @firstName " +
                                     " , LastName = @lastName " +
-                                    " , Title = @title";
+                                    " , Title = @title " +
+                                    "WHERE CustomerID = @customerId";
             updateCmd.Parameters.AddWithValue("@dob", c.DateOfBirth);
             updateCmd.Parameters.AddWithValue("@firstName", c.FirstName);
             updateCmd.Parameters.AddWithValue("@lastName", c.LastName);
             updateCmd.Parameters.AddWithValue("@title", c.Title);
+            updateCmd.Parameters.AddWithValue("@customerId", c.CustomerID);
 
             // open connection to the database
             con.Open();
