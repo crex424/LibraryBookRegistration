@@ -146,11 +146,11 @@ namespace LibraryBookRegistration
             string lName = reader["LastName"].ToString();
             DateTime dob = Convert.ToDateTime(reader["DateOfBirth"]);
 
-            Customer currCus = new Customer(title, fName, lName, dob);
-            currCus.CustomerID = customerID;
+            Customer currentCustomer = new Customer(title, fName, lName, dob);
+            currentCustomer.CustomerID = customerID;
 
             // Return customer
-            return currCus;
+            return currentCustomer;
         }
     }
 }
