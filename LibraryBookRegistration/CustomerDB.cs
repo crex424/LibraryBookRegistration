@@ -90,7 +90,7 @@ namespace LibraryBookRegistration
             Delete(c.CustomerID);
         }
         /// <summary>
-        /// Deletes a Customer using their ID
+        /// Deletes a Customer using CustomerID
         /// </summary>
         /// <param name="customerID"></param>
         /// <exception cref="ArgumentException">Thrown if Customer does not exist</exception>
@@ -115,6 +115,42 @@ namespace LibraryBookRegistration
             {
                 throw new ArgumentException("A customer with that id does not exist!");
             }
+        }
+        /// <summary>
+        /// Gets a customer using CustomerID
+        /// </summary>
+        /// <param name="customerID">The CustomerID used to get Customer</param>
+        /// <returns>A Customer</returns>
+        public static Customer GetCustomer(int customerID)
+        {
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT CustomerID, Title, FirstName, LastName, DateOfBirth " +
+                                    "FROM Customer " +
+                                    "WHERE CustomerID = @customerID ";
+            selectCmd.Parameters.AddWithValue("@customerID", customerID);
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            reader.Read();
+            string title = reader["Title"].ToString();
+            string fName = reader["FirstName"].ToString();
+            string lName = reader["LastName"].ToString();
+            DateTime dob = Convert.ToDateTime(reader["DateOfBirth"]);
+
+            Customer currCus = new Customer(title, fName, lName, dob);
+            currCus.CustomerID = customerID;
+
+            // Return customer
+            return currCus;
         }
     }
 }
