@@ -29,8 +29,8 @@ namespace LibraryBookRegistration
             insertCmd.CommandText = "INSERT INTO Customer(DateOfBirth, FirstName, LastName, Title) " +
                                               "VALUES (@dob, @firstName, @lastName, @title)";
             insertCmd.Parameters.AddWithValue("@dob", c.DateOfBirth);
-            insertCmd.Parameters.AddWithValue("@firstName", c.FirstName);
-            insertCmd.Parameters.AddWithValue("@lastName", c.LastName);
+            insertCmd.Parameters.AddWithValue("@fName", c.FirstName);
+            insertCmd.Parameters.AddWithValue("@lName", c.LastName);
             insertCmd.Parameters.AddWithValue("title", c.Title);
 
             // open connection to the database
@@ -83,6 +83,10 @@ namespace LibraryBookRegistration
         /// <exception cref="SqlException">Thrown for SQL problem</exception>
         public static void Delete(Customer c)
         {
+            if (c.CustomerID == 0)
+            {
+                throw new ArgumentException("The CustomerID must be populated!");
+            }
             Delete(c.CustomerID);
         }
     }
