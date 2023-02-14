@@ -44,7 +44,7 @@ namespace LibraryBookRegistration
         /// Updates a Customer
         /// </summary>
         /// <param name="c">Customer to be updated</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentException">Thrown if Customer does not exist</exception>
         public static void Update(Customer c)
         {
             // establish connection to database
@@ -70,7 +70,11 @@ namespace LibraryBookRegistration
             con.Open();
 
             // execute query
-            updateCmd.ExecuteNonQuery();
+            int rows = updateCmd.ExecuteNonQuery();
+            if (rows == 0)
+            {
+                throw new ArgumentException("A Customer with that Id does not exist!");
+            }
         }
     }
 }
