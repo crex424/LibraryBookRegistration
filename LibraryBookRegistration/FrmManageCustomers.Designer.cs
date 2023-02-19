@@ -99,7 +99,7 @@
             this.dtpDOB.Name = "dtpDOB";
             this.dtpDOB.Size = new System.Drawing.Size(200, 23);
             this.dtpDOB.TabIndex = 4;
-            this.dtpDOB.Value = new System.DateTime(2022, 11, 19, 20, 59, 48, 0);
+            this.dtpDOB.Value = new System.DateTime(2023, 2, 18, 0, 0, 0, 0);
             // 
             // lblDOB
             // 
