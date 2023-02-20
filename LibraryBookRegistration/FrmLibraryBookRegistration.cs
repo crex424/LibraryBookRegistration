@@ -24,7 +24,9 @@ namespace LibraryBookRegistration
                 lblLibraryBookRegistration.ForeColor = lblLibraryBookRegistration.ForeColor == Color.Red ? Color.Green : Color.Red;
             }
         }
-
+        /// <summary>
+        /// Opens FrmManageRegistrations form when clicked
+        /// </summary>
         private void btnManageRegistration_Click(object sender, EventArgs e)
         {
             FrmManageRegistrations newManageRegForm = new();
