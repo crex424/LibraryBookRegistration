@@ -24,5 +24,12 @@ namespace LibraryBookRegistration
                 lblLibraryBookRegistration.ForeColor = lblLibraryBookRegistration.ForeColor == Color.Red ? Color.Green : Color.Red;
             }
         }
+
+        private void btnManageRegistration_Click(object sender, EventArgs e)
+        {
+            FrmManageRegistrations newManageRegForm = new();
+            newManageRegForm.ShowDialog();
+
+        }
     }
 }
