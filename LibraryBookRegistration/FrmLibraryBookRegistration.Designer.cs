@@ -87,6 +87,7 @@
             this.btnManageRegistration.TabIndex = 7;
             this.btnManageRegistration.Text = "&Manage Registrations";
             this.btnManageRegistration.UseVisualStyleBackColor = true;
+            this.btnManageRegistration.Click += new System.EventHandler(this.btnManageRegistration_Click);
             // 
             // btnManageBook
             // 
