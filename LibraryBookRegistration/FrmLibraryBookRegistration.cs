@@ -40,5 +40,14 @@ namespace LibraryBookRegistration
                 cbxCustomerName.Items.Add(currCus);
             }
         }
+
+        /// <summary>
+        /// Opens FrmManageRegistrations form when clicked
+        /// </summary>
+        private void btnManageRegistration_Click(object sender, EventArgs e)
+        {
+            FrmManageRegistrations newManageRegForm = new();
+            newManageRegForm.ShowDialog();
+        }
     }
 }
