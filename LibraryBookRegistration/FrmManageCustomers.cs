@@ -16,7 +16,9 @@ namespace LibraryBookRegistration
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Populates ListView with customer data when called
+        /// </summary>
         public void PopulateCustomerListView()
         {
             lviCustomers.Items.Clear();
