@@ -19,7 +19,7 @@ namespace LibraryBookRegistration
 
         private void FrmManageCustomers_Load(object sender, EventArgs e)
         {
-
+            PopulateCustomerListView();
         }
 
         /// <summary>
