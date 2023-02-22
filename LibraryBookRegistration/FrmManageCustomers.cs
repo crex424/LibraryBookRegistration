@@ -16,7 +16,13 @@ namespace LibraryBookRegistration
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// When the form loads this method will be called.
+        /// Currently this method when called will populate
+        /// the Customers ListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmManageCustomers_Load(object sender, EventArgs e)
         {
             PopulateCustomerListView();
