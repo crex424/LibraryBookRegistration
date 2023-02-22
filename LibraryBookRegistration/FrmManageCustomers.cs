@@ -16,6 +16,12 @@ namespace LibraryBookRegistration
         {
             InitializeComponent();
         }
+
+        private void FrmManageCustomers_Load(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// Populates ListView with customer data when called
         /// </summary>
