@@ -9,7 +9,7 @@ namespace LibraryBookRegistration
         }
         private void FrmLibraryBookRegistration_Load(object sender, EventArgs e)
         {
-
+            PopulateCustomerComboBox();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
