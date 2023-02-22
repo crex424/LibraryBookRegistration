@@ -16,5 +16,17 @@ namespace LibraryBookRegistration
         {
             InitializeComponent();
         }
+
+        public void PopulateCustomerListView()
+        {
+            lviCustomers.Items.Clear();
+            
+            List<Customer> customers = CustomerDB.GetAllCustomers();
+
+            foreach (Customer currCustomer in customers) 
+            {
+                lviCustomers.Items.Add(currCustomer.ToString());
+            }
+        }
     }
 }
