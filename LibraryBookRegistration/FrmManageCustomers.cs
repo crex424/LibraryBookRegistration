@@ -20,10 +20,10 @@ namespace LibraryBookRegistration
         public void PopulateCustomerListView()
         {
             lviCustomers.Items.Clear();
-            
+
             List<Customer> customers = CustomerDB.GetAllCustomers();
 
-            foreach (Customer currCustomer in customers) 
+            foreach (Customer currCustomer in customers)
             {
                 lviCustomers.Items.Add(currCustomer.ToString());
             }
