@@ -183,6 +183,7 @@
             this.Controls.Add(this.cbxCustomerName);
             this.Name = "FrmLibraryBookRegistration";
             this.Text = "Library Book Registration";
+            this.Load += new System.EventHandler(this.FrmLibraryBookRegistration_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
