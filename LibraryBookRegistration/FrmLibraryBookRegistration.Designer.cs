@@ -106,6 +106,7 @@
             this.btnManageCustomer.TabIndex = 5;
             this.btnManageCustomer.Text = "Manage &Customers";
             this.btnManageCustomer.UseVisualStyleBackColor = true;
+            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
             // 
             // lblLibraryBookRegistration
             // 
