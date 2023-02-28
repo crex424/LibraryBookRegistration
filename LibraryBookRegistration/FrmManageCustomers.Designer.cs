@@ -201,6 +201,7 @@
             this.Controls.Add(this.lblCustomerForm);
             this.Name = "FrmManageCustomers";
             this.Text = "Customer Manager";
+            this.Load += new System.EventHandler(this.FrmManageCustomers_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
