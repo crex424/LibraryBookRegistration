@@ -7,6 +7,17 @@ namespace LibraryBookRegistration
             InitializeComponent();
             titleBlink();
         }
+        /// <summary>
+        /// When the form loads this method will be called.
+        /// Currently this method when called will populate 
+        /// the Customer ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmLibraryBookRegistration_Load(object sender, EventArgs e)
+        {
+            PopulateCustomerComboBox();
+        }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
