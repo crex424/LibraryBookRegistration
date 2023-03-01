@@ -17,6 +17,7 @@ namespace LibraryBookRegistration
         private void FrmLibraryBookRegistration_Load(object sender, EventArgs e)
         {
             PopulateCustomerComboBox();
+            PopulateBookComboBox();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace LibraryBookRegistration
         }
 
         /// <summary>
-        /// Populates Customer Combo Box - Dropdown List
+        /// Populates Customer ComboBox - Dropdown List
         /// </summary>
         private void PopulateCustomerComboBox()
         {
@@ -47,8 +48,23 @@ namespace LibraryBookRegistration
 
             foreach (Customer currCus in customers)
             {
-                // Add entire customer object to combo box
+                // Add entire customer object to ComboBox
                 cbxCustomerName.Items.Add(currCus);
+            }
+        }
+        /// <summary>
+        /// Populates Customer ComboBox - DropDown List
+        /// </summary>
+        private void PopulateBookComboBox()
+        {
+            cbxBookTitle.Items.Clear();
+
+            List<Book> books = BookDB.GetAllBooks();
+
+            foreach (Book currBook in books)
+            {
+                // Add title from book object to ComboBox
+                cbxBookTitle.Items.Add(currBook.Title);
             }
         }
 
