@@ -97,6 +97,7 @@
             this.btnManageBook.TabIndex = 6;
             this.btnManageBook.Text = "Manage &Books";
             this.btnManageBook.UseVisualStyleBackColor = true;
+            this.btnManageBook.Click += new System.EventHandler(this.btnManageBook_Click);
             // 
             // btnManageCustomer
             // 

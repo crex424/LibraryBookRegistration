@@ -68,5 +68,13 @@ namespace LibraryBookRegistration
             FrmManageCustomers newManageCustomerForm = new();
             newManageCustomerForm.ShowDialog();
         }
+        /// <summary>
+        /// Opens FrmManageBook form when clicked
+        /// </summary>
+        private void btnManageBook_Click(object sender, EventArgs e)
+        {
+            FrmManageBook newManageBookForm = new();
+            newManageBookForm.ShowDialog();
+        }
     }
 }
