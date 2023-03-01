@@ -16,7 +16,11 @@ namespace LibraryBookRegistration
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// When form is opened this method will be called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmManageBook_Load(object sender, EventArgs e)
         {
             lviBooks.Columns.Add("ISBN", 120, HorizontalAlignment.Left);
@@ -26,7 +30,9 @@ namespace LibraryBookRegistration
 
             PopulateBookListView();
         }
-
+        /// <summary>
+        /// Populates the ListView with data from Book table
+        /// </summary>
         private void PopulateBookListView()
         {
             lviBooks.Items.Clear();
