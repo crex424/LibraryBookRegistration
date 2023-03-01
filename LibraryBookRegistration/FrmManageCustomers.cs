@@ -25,6 +25,13 @@ namespace LibraryBookRegistration
         /// <param name="e"></param>
         private void FrmManageCustomers_Load(object sender, EventArgs e)
         {
+            // Add columns to ListViews
+            lviCustomers.Columns.Add("ID", 45, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("Title", 50, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("LastName", 100, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("FirstName", 100, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("DateOfBirth", 100, HorizontalAlignment.Left);
+
             PopulateCustomerListView();
         }
 
