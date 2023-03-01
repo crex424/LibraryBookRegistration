@@ -39,7 +39,9 @@ namespace LibraryBookRegistration
 
             foreach (Customer currCustomer in customers)
             {
-                lviCustomers.Items.Add(currCustomer.ToString());
+                ListViewItem item = new(new[] { currCustomer.CustomerID.ToString(), currCustomer.Title, currCustomer.LastName, currCustomer.FirstName, currCustomer.DateOfBirth.ToShortDateString() });
+                Tag = currCustomer;
+                lviCustomers.Items.Add(item);
             }
         }
     }
