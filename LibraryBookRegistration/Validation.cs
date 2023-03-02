@@ -41,6 +41,9 @@ namespace LibraryBookRegistration
         /// <returns>True if ISBN is valid, false if not valid</returns>
         public static bool IsValidISBN(string isbn)
         {
+            isbn = DataConfiguration.RemoveAllWhiteSpace(isbn);
+            isbn = DataConfiguration.RemoveDashesFromISBN(isbn);
+
             // Length must be 10
             int n = isbn.Length;
             if (n != 10)
