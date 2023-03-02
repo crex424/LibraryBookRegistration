@@ -87,5 +87,27 @@ namespace LibraryBookRegistration
             }
             return false;
         }
+
+        /// <summary>
+        /// Check if an isbn already exists in database
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>true if exists</returns>
+        public static bool IsExistedISBN(string isbn)
+        {
+            List<Book> books = BookDB.GetAllBooks();
+
+            foreach (Book currBook in books)
+            {
+                isbn = DataConfiguration.RemoveAllWhiteSpace(isbn);
+                isbn = DataConfiguration.RemoveDashesFromISBN(isbn);
+
+                if (isbn == currBook.ISBN)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
