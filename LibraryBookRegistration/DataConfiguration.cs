@@ -10,23 +10,18 @@ namespace LibraryBookRegistration
     public class DataConfiguration
     {
         /// <summary>
-        /// Removes white space from the beginning and end of a string 
-        /// </summary>
-        /// <param name="text">the string to have white space removed</param>
-        /// <returns>A string with white space removed from the beginning and end of a string</returns>
-        public static string RemoveWhiteSpace(string text)
-        {
-            return text.Trim();
-        }
-        /// <summary>
-        /// Removes all white space from string
+        /// Removes all leading, trailing white space and within the string
         /// </summary>
         /// <param name="text">the string to have white space removed</param>
         /// <returns>A string with all white space removed</returns>
         public static string RemoveAllWhiteSpace(string text)
         {
-            return Regex.Replace(text, " ", "");
+            text = text.Trim();
+            text = Regex.Replace(text, " ", "");
+
+            return text;
         }
+
         /// <summary>
         /// Removes dashes from within a isbn
         /// </summary>
