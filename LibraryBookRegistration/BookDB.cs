@@ -186,5 +186,62 @@ namespace LibraryBookRegistration
             // Return list of Customers
             return books;
         }
+
+
+        /// <summary>
+        /// Gets a list of Books not yet registered by a Customer
+        /// </summary>
+        /// <param name="customerID">CustomerID of a Customer</param>
+        /// <returns>List of Books not yet registered by a Customer</returns>
+        public static List<Book> GetBooksNotYetRegisterByCustomerID(int customerID)
+        {
+            /*
+            SELECT ISBN, Title, Price
+            FROM Book
+            WHERE ISBN NOT IN (SELECT ISBN
+				               FROM Registration
+				               WHERE CustomerID =  @customerID)
+             */
+
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT ISBN, Title, Price " +
+                                    "FROM Book " +
+                                    "WHERE ISBN NOT IN (SELECT ISBN " +
+                                    "                   FROM Registration " +
+                                    "                   WHERE CustomerID = @customerID) " +
+                                    "ORDER BY Title";
+            selectCmd.Parameters.AddWithValue("@customerID", customerID);
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            List<Book> booksNotYetRegisterByCustomerID = new();
+
+            while (reader.Read())
+            {
+                string isbn = reader["ISBN"].ToString();
+                string title = DataConfiguration.FormalizeName(reader["Title"].ToString());
+                double price = Convert.ToDouble(reader["Price"]);
+
+                if (Validation.IsValidISBN(isbn) && price >= 0)
+                {
+                    isbn = DataConfiguration.RemoveAllWhiteSpace(isbn);
+                    isbn = DataConfiguration.RemoveDashesFromISBN(isbn);
+                    Book tempBook = new Book(isbn, title, price);
+                    booksNotYetRegisterByCustomerID.Add(tempBook);
+                }
+            }
+
+            // Return list of Books Not Yet Registered by CustomerID
+            return booksNotYetRegisterByCustomerID;
+        }
     }
 }
