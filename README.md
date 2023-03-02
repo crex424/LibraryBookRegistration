@@ -21,9 +21,24 @@ Instructor: [Joseph Ortiz](https://github.com/JoeProgrammer88)
 ### Description
 This project repository is to gain knowledge, skills and experience of working in a team with Source Control
 
-### Contributors
+## Contributors
 [Campbell Rex](https://github.com/crex424)
 
 [Tung Kim](https://github.com/TungKimProgrammer)
 
-### 
+## Targets
+### Stage 1:
+- Working validation for 10 digit ISBN
+- Fully skilled with Source Control
+- Working CRUD functionalities using ADO.NET
+
+### Stage 2:
+- Add more validation for 13 digit ISBN
+- Implement EF Core for Database
+
+## Getting Started
+Requirements:
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
+- [Database file](LibraryBookRegistration.sql)
+
+## Project Screenshots
