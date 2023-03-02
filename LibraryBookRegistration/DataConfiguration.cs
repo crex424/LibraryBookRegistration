@@ -31,5 +31,25 @@ namespace LibraryBookRegistration
         {
             return Regex.Replace(isbn, "-", "");
         }
+
+        /// <summary>
+        /// fomalize a single/multiple-word name/title
+        /// by removing all leading and trailing white-space characters
+        /// and replacing multiple spaces by single space within a name/title
+        /// </summary>
+        /// <param name="name">Name/Title to be formalized</param>
+        /// <returns>Formalized Name/Title with properly capitalized and unnecessary spaces </returns>
+        public static string FormalizeName(string name)
+        {
+            // remove all leading and trailing white-space characters
+            name = name.Trim();
+
+            // replace multiple spaces with single space within a name
+            name = Regex.Replace(name, " {2,}", " ");
+
+            // properly capitalize multiple-word name
+            name = Regex.Replace(name, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+            return name;
+        }
     }
 }
