@@ -142,5 +142,45 @@ namespace LibraryBookRegistration
             // Return list of Customers
             return registrations;
         }
+
+        /// <summary>
+        /// Gets a list of registrations of a Customer
+        /// </summary>
+        /// <param name="customerID">CustomerID of the Customer to get list</param>
+        /// <returns>List of registrations of a Customer</returns>
+        public static List<Registration> GetRegistrationsByCustomerID(int customerID)
+        {
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT CustomerID, ISBN, RegDate " +
+                                    "FROM Registration " +
+                                    "WHERE CustomerID = @customerID " +
+                                    "ORDER BY ISBN, RegDate ";
+            selectCmd.Parameters.AddWithValue("@customerID", customerID);
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            List<Registration> registrationsByCustomerID = new();
+
+            while (reader.Read())
+            {
+                string isbn = reader["ISBN"].ToString();
+                DateTime regDate = Convert.ToDateTime(reader["RegDate"]);
+
+                Registration tempReg = new Registration(customerID, isbn, regDate);
+                registrationsByCustomerID.Add(tempReg);
+            }
+
+            // Return list of Registrations filtered by CustomerID
+            return registrationsByCustomerID;
+        }
     }
 }
