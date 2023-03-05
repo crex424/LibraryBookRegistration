@@ -243,5 +243,53 @@ namespace LibraryBookRegistration
             // Return list of Books Not Yet Registered by CustomerID
             return booksNotYetRegisterByCustomerID;
         }
+
+        /// <summary>
+        /// Get books with valid ISBN and Price
+        /// </summary>
+        /// <returns>List of Books with valid ISBN and Price</returns>
+        public static List<Book> GetAllValidBooks()
+        {
+            // Get connection
+            SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT ISBN, Title, Price " +
+                                    "FROM Book " +
+                                    "ORDER BY ISBN";
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            List<Book> allValidBooks = new();
+
+            while (reader.Read())
+            {
+                string isbn = reader["ISBN"].ToString();
+                string title = DataConfiguration.FormalizeName(reader["Title"].ToString());
+                double price = Convert.ToDouble(reader["Price"]);
+
+                if (Validation.IsValidISBN(isbn) && price >= 0)
+                {
+                    isbn = DataConfiguration.RemoveAllWhiteSpace(isbn);
+                    isbn = DataConfiguration.RemoveDashesFromISBN(isbn);
+
+                    Book tempBook = new Book(isbn, title, price);
+                    allValidBooks.Add(tempBook);
+                }
+
+            }
+
+            // Close the connection
+            con.Close();
+
+            // Return list of Customers
+            return allValidBooks;
+        }
     }
 }
