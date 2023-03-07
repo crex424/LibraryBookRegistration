@@ -21,7 +21,7 @@ namespace LibraryBookRegistration
         {
             // Section 2: Listview to display all Registrations
             CreateListViewColumns();
-            PoplulateRegistrationListView();
+            PopulateRegistrationListView();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace LibraryBookRegistration
         /// <summary>
         /// Populates a listbox for all Registrations
         /// </summary>
-        private void PoplulateRegistrationListView()
+        private void PopulateRegistrationListView()
         {
             lviRegistrations.Items.Clear();
 
@@ -56,7 +56,6 @@ namespace LibraryBookRegistration
                 Tag = currReg;
                 lviRegistrations.Items.Add(item);
             }
-
         }
     }
 }
