@@ -146,6 +146,7 @@
             this.Controls.Add(this.lblRegistrationManagingTool);
             this.Name = "FrmManageRegistrations";
             this.Text = "Registration Manager";
+            this.Load += new System.EventHandler(this.FrmManageRegistrations_Load);
             this.grbCustomersAndBooks.ResumeLayout(false);
             this.grbRegistrations.ResumeLayout(false);
             this.ResumeLayout(false);
