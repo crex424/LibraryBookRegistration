@@ -93,6 +93,38 @@ namespace LibraryBookRegistration
             }
         }
 
-        
+        /// <summary>
+        /// Populates a listbox of registered Books of a selected Customer 
+        /// </summary>
+        /// <param name="customerID"></param>
+        private void PopulateBooksAndRegDateListView(int customerID)
+        {
+            lviBooksAndRegDate.Items.Clear();
+
+            List<Registration> registrationsByID = RegistrationDB.GetRegistrationsByCustomerID(customerID);
+
+            foreach (Registration currReg in registrationsByID)
+            {
+                ListViewItem item = new(new[] { currReg.ISBN,
+                                                BookDB.GetBook(currReg.ISBN).Title,
+                                                BookDB.GetBook(currReg.ISBN).Price.ToString("C"),
+                                                currReg.RegDate.ToShortDateString() });
+                Tag = currReg;
+                lviBooksAndRegDate.Items.Add(item);
+            }
+        }
+
+        private void lviCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // show a message when users click on blank part of listbox
+            if (lviCustomers.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
+            int customerID = Convert.ToInt32(selectedCustomer.Text);
+            PopulateBooksAndRegDateListView(customerID);
+        }
     }
 }
