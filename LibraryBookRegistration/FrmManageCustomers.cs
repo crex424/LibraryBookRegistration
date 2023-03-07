@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -50,6 +52,76 @@ namespace LibraryBookRegistration
                 Tag = currCustomer;
                 lviCustomers.Items.Add(item);
             }
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            if (IsValidInput())
+            {
+                string title = DataConfiguration.FormalizeName(txtTitle.Text);
+                string firsName = DataConfiguration.FormalizeName(txtFirstName.Text);
+                string lastName = DataConfiguration.FormalizeName(txtLastName.Text);
+                DateTime dob = dtpDOB.Value.Date;
+
+                Customer newCus = new Customer(title, firsName, lastName, dob);
+
+                CustomerDB.Add(newCus);
+                MessageBox.Show($"'{newCus.FullName}' has been added succesfully!",
+                                "Successful!",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.None);
+                PopulateCustomerListView();
+                clearTextbox();
+            }
+        }
+
+        /// <summary>
+        /// Validates input đata
+        /// </summary>
+        /// <returns>True when all input textboxes are filled with valid data: 
+        /// Date of birth should be before today's date
+        /// </returns>
+        private bool IsValidInput()
+        {
+            DateTime dob = dtpDOB.Value;
+
+            // all textboxes are filled
+            if (Validation.IsPresent(txtTitle) &&
+                Validation.IsPresent(txtFirstName) &&
+                Validation.IsPresent(txtLastName) &&
+                dob < DateTime.Today)
+            {
+                lblErrMsg.Text = "";
+                return true;
+            }
+            else
+            {
+                if (!Validation.IsPresent(txtTitle) ||
+                    !Validation.IsPresent(txtFirstName) ||
+                    !Validation.IsPresent(txtLastName))
+                {
+                    lblErrMsg.Text = "All textboxes shouldn't be empty!";
+                }
+                if (dob >= DateTime.Today)
+                {
+                    lblErrMsg.Text = "Date of birth can't be equal to or greater than today!";
+                }
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Clears all textboxes and set datetimepicker to today's date
+        /// </summary>
+        private void clearTextbox()
+        {
+            txtTitle.Text = "";
+            txtTitle.Focus();
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            dtpDOB.Value = DateTime.Today;
+            lblErrMsg.Text = "";
         }
     }
 }
