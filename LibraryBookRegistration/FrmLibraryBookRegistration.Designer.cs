@@ -154,6 +154,7 @@
             this.cbxCustomerName.Size = new System.Drawing.Size(200, 23);
             this.cbxCustomerName.TabIndex = 1;
             this.cbxCustomerName.Tag = "";
+            this.cbxCustomerName.SelectedIndexChanged += new System.EventHandler(this.cbxCustomerName_SelectedIndexChanged);
             // 
             // lblAuthors
             // 
