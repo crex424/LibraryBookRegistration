@@ -193,5 +193,41 @@ namespace LibraryBookRegistration
             // return customers
             return customers;
         }
+
+        /// <summary>
+        /// Gets a list of Customers who have registration(s)
+        /// </summary>
+        /// <returns>List of Customers who have registration(s)</returns>
+        public static List<Customer> GetCustomersWithRegistrations()
+        {
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT CustomerID, COUNT(ISBN) " +
+                                    "FROM Registration " +
+                                    "GROUP BY CustomerID " +
+                                    "ORDER BY CustomerID ";
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            List<Customer> customersWithRegistrations = new();
+
+            while (reader.Read())
+            {
+                int customerID = Convert.ToInt32(reader["CustomerID"]);
+
+                customersWithRegistrations.Add(CustomerDB.GetCustomer(customerID));
+            }
+
+            // Return list of Customers
+            return customersWithRegistrations;
+        }
     }
 }
