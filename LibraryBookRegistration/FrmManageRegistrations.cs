@@ -19,8 +19,13 @@ namespace LibraryBookRegistration
 
         private void FrmManageRegistrations_Load(object sender, EventArgs e)
         {
-            // Section 2: Listview to display all Registrations
+            // Section 1 + 2: Creates columns for Listviews
             CreateListViewColumns();
+
+            // Section 1: Populates Listview to display Customers who have registration(s)
+            PopulateCustomerListView();
+
+            // Section 2: Populates Listview to display all registrations
             PopulateRegistrationListView();
         }
 
@@ -35,6 +40,17 @@ namespace LibraryBookRegistration
             lviRegistrations.Columns.Add("ISBN", 150, HorizontalAlignment.Left);
             lviRegistrations.Columns.Add("Book Title", 210, HorizontalAlignment.Left);
             lviRegistrations.Columns.Add("Reg Date", 100, HorizontalAlignment.Left);
+
+            // create collumns for Customer listview
+            lviCustomers.Columns.Add("ID", 30, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("FullName", 140, HorizontalAlignment.Left);
+            lviCustomers.Columns.Add("DateOfBirth", 75, HorizontalAlignment.Left);
+
+            // create collumns for Books and RegDates listview
+            lviBooksAndRegDate.Columns.Add("ISBN", 90, HorizontalAlignment.Left);
+            lviBooksAndRegDate.Columns.Add("Book Title", 160, HorizontalAlignment.Left);
+            lviBooksAndRegDate.Columns.Add("Price", 55, HorizontalAlignment.Left);
+            lviBooksAndRegDate.Columns.Add("Reg Date", 75, HorizontalAlignment.Left);
         }
 
         /// <summary>
@@ -57,5 +73,26 @@ namespace LibraryBookRegistration
                 lviRegistrations.Items.Add(item);
             }
         }
+
+        /// <summary>
+        /// Populates a listview of all Customers who have registrations
+        /// </summary>
+        private void PopulateCustomerListView()
+        {
+            lviCustomers.Items.Clear();
+
+            List<Customer> customersWithRegistrations = CustomerDB.GetCustomersWithRegistrations();
+
+            foreach (Customer currCustomer in customersWithRegistrations)
+            {
+                ListViewItem item = new(new[] { currCustomer.CustomerID.ToString(),
+                                                currCustomer.FullName,
+                                                currCustomer.DateOfBirth.ToShortDateString() });
+                Tag = currCustomer;
+                lviCustomers.Items.Add(item);
+            }
+        }
+
+        
     }
 }
