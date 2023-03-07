@@ -182,5 +182,33 @@ namespace LibraryBookRegistration
             // Return list of Registrations filtered by CustomerID
             return registrationsByCustomerID;
         }
+
+        /// <summary>
+        /// Add a registration to database
+        /// </summary>
+        /// <param name="r">Registration to be added</param>
+        /// <returns>True if adding successfully</returns>
+        public static bool RegisterBook(Registration r)
+        {
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // prepare insert statement
+            SqlCommand insertCmd = new SqlCommand();
+            insertCmd.Connection = con;
+            // parameterized query
+            insertCmd.CommandText = "INSERT INTO Registration (CustomerID, ISBN, RegDate) " +
+                                                      "VALUES (@customerID, @isbn, @regDate) ";
+            insertCmd.Parameters.AddWithValue("@customerID", r.CustomerID);
+            insertCmd.Parameters.AddWithValue("@isbn", r.ISBN);
+            insertCmd.Parameters.AddWithValue("@regDate", r.RegDate);
+
+            // open connection to the database
+            con.Open();
+
+            // execute insert qury
+            int rows = insertCmd.ExecuteNonQuery();
+
+            return rows != 0;
+        }
     }
 }
