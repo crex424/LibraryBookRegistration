@@ -115,5 +115,17 @@ namespace LibraryBookRegistration
             FrmManageBook newManageBookForm = new();
             newManageBookForm.ShowDialog();
         }
+
+        private void cbxCustomerName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxCustomerName.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a customer to show available books to register!");
+                return;
+            }
+
+            Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
+            PopulateBookComboBox(selectedCus.CustomerID);
+        }
     }
 }
