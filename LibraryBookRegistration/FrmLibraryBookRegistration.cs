@@ -64,7 +64,7 @@ namespace LibraryBookRegistration
             foreach (Book currBook in books)
             {
                 // Add title from book object to ComboBox
-                cbxBookTitle.Items.Add(currBook.Title);
+                cbxBookTitle.Items.Add(currBook);
             }
         }
 
