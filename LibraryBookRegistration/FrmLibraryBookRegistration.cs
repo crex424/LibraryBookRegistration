@@ -64,7 +64,30 @@ namespace LibraryBookRegistration
             foreach (Book currBook in books)
             {
                 // Add title from book object to ComboBox
-                cbxBookTitle.Items.Add(currBook.Title);
+                cbxBookTitle.Items.Add(currBook);
+            }
+        }
+
+        /// <summary>
+        /// Populates combo box for Books not yet registered by a Customer
+        /// when users select a customer from Customer combo box
+        /// </summary>
+        /// <param name="customerID">CustomerID of a Customer</param>
+        private void PopulateBookComboBox(int customerID)
+        {
+            cbxBookTitle.Items.Clear();
+
+            List<Book> booksNotYetRegisterByCustomerID = BookDB.GetBooksNotYetRegisterByCustomerID(customerID);
+
+            foreach (Book currBook in booksNotYetRegisterByCustomerID)
+            {
+                // Add entire book object to combo box
+                cbxBookTitle.Items.Add(currBook);
+            }
+
+            if (booksNotYetRegisterByCustomerID.Count == 0)
+            {
+                MessageBox.Show("This customer has registered all available books!");
             }
         }
 
@@ -91,6 +114,18 @@ namespace LibraryBookRegistration
         {
             FrmManageBook newManageBookForm = new();
             newManageBookForm.ShowDialog();
+        }
+
+        private void cbxCustomerName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxCustomerName.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a customer to show available books to register!");
+                return;
+            }
+
+            Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
+            PopulateBookComboBox(selectedCus.CustomerID);
         }
     }
 }
