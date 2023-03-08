@@ -135,6 +135,7 @@
             this.dtpRegistration.Name = "dtpRegistration";
             this.dtpRegistration.Size = new System.Drawing.Size(200, 23);
             this.dtpRegistration.TabIndex = 3;
+            this.dtpRegistration.ValueChanged += new System.EventHandler(this.dtpRegistration_ValueChanged);
             // 
             // cbxBookTitle
             // 
@@ -144,6 +145,7 @@
             this.cbxBookTitle.Name = "cbxBookTitle";
             this.cbxBookTitle.Size = new System.Drawing.Size(200, 23);
             this.cbxBookTitle.TabIndex = 2;
+            this.cbxBookTitle.SelectedIndexChanged += new System.EventHandler(this.cbxBookTitle_SelectedIndexChanged);
             // 
             // cbxCustomerName
             // 
