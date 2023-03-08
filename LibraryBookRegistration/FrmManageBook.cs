@@ -72,6 +72,16 @@ namespace LibraryBookRegistration
                 clearTextbox();
             }
         }
+
+        private void clearTextbox()
+        {
+            txtTitle.Text = "";
+            txtTitle.Focus();
+            txtISBN.Text = "";
+            txtPrice.Text = "";
+            lblErrMsg.Text = "";
+        }
+
         /// <summary>
         /// Validates Book input data
         /// </summary>
