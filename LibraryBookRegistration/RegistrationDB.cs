@@ -210,5 +210,46 @@ namespace LibraryBookRegistration
 
             return rows != 0;
         }
+
+        /// <summary>
+        /// Counts Registrations of a Customer
+        /// </summary>
+        /// <param name="customerID">CustomerID of the Customer</param>
+        /// <returns>Counts Registrations of a Customer</returns>
+        public static int CountRegistrationsGroupByCustomerID(int customerID)
+        {
+            // Get connection
+            using SqlConnection con = DBHelper.GetDatabaseConnection("BookRegistration");
+
+            // Prepare the query 
+            SqlCommand selectCmd = new SqlCommand();
+            selectCmd.Connection = con;
+            selectCmd.CommandText = "SELECT CustomerID, COUNT(ISBN) AS CountRegistrationsGroupByCustomerID " +
+                                    "FROM Registration " +
+                                    "WHERE CustomerID = @customerID " +
+                                    "GROUP BY CustomerID ";
+            selectCmd.Parameters.AddWithValue("@customerID", customerID);
+
+            // open connection to the database
+            con.Open();
+
+            // Execute the query and use results
+            SqlDataReader reader = selectCmd.ExecuteReader();
+
+            int countRegistrationsGroupByCustomerID;
+
+            try
+            {
+                reader.Read();
+                countRegistrationsGroupByCustomerID = Convert.ToInt32(reader["CountRegistrationsGroupByCustomerID"]);
+            }
+            catch (InvalidOperationException)
+            {
+                countRegistrationsGroupByCustomerID = 0;
+            }
+
+            // Return list of Customers
+            return countRegistrationsGroupByCustomerID;
+        }
     }
 }
