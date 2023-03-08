@@ -55,6 +55,7 @@
             this.lviCustomers.TabIndex = 6;
             this.lviCustomers.UseCompatibleStateImageBehavior = false;
             this.lviCustomers.View = System.Windows.Forms.View.Details;
+            this.lviCustomers.SelectedIndexChanged += new System.EventHandler(this.lviCustomers_SelectedIndexChanged);
             // 
             // btnUpdateCustomer
             // 
@@ -64,6 +65,7 @@
             this.btnUpdateCustomer.TabIndex = 7;
             this.btnUpdateCustomer.Text = "&Update Customer";
             this.btnUpdateCustomer.UseVisualStyleBackColor = true;
+            this.btnUpdateCustomer.Click += new System.EventHandler(this.btnUpdateCustomer_Click);
             // 
             // btnDeleteCustomer
             // 
@@ -73,6 +75,7 @@
             this.btnDeleteCustomer.TabIndex = 8;
             this.btnDeleteCustomer.Text = "&Delete Customer";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // lblErrMsg
             // 
@@ -91,6 +94,7 @@
             this.btnAddCustomer.TabIndex = 5;
             this.btnAddCustomer.Text = "&Add Customer";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // dtpDOB
             // 
@@ -100,6 +104,7 @@
             this.dtpDOB.Size = new System.Drawing.Size(200, 23);
             this.dtpDOB.TabIndex = 4;
             this.dtpDOB.Value = new System.DateTime(2023, 2, 18, 0, 0, 0, 0);
+            this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
             // 
             // lblDOB
             // 
@@ -116,6 +121,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(200, 23);
             this.txtLastName.TabIndex = 3;
+            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             // 
             // lblLastName
             // 
@@ -132,6 +138,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(200, 23);
             this.txtFirstName.TabIndex = 2;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // lblFirstName
             // 
@@ -148,6 +155,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(200, 23);
             this.txtTitle.TabIndex = 1;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // lblTitle
             // 

@@ -81,7 +81,7 @@
             // 
             // btnManageRegistration
             // 
-            this.btnManageRegistration.Location = new System.Drawing.Point(290, 272);
+            this.btnManageRegistration.Location = new System.Drawing.Point(436, 272);
             this.btnManageRegistration.Name = "btnManageRegistration";
             this.btnManageRegistration.Size = new System.Drawing.Size(153, 36);
             this.btnManageRegistration.TabIndex = 7;
@@ -91,7 +91,7 @@
             // 
             // btnManageBook
             // 
-            this.btnManageBook.Location = new System.Drawing.Point(290, 203);
+            this.btnManageBook.Location = new System.Drawing.Point(436, 203);
             this.btnManageBook.Name = "btnManageBook";
             this.btnManageBook.Size = new System.Drawing.Size(153, 36);
             this.btnManageBook.TabIndex = 6;
@@ -101,7 +101,7 @@
             // 
             // btnManageCustomer
             // 
-            this.btnManageCustomer.Location = new System.Drawing.Point(290, 134);
+            this.btnManageCustomer.Location = new System.Drawing.Point(436, 134);
             this.btnManageCustomer.Name = "btnManageCustomer";
             this.btnManageCustomer.Size = new System.Drawing.Size(153, 36);
             this.btnManageCustomer.TabIndex = 5;
@@ -113,7 +113,7 @@
             // 
             this.lblLibraryBookRegistration.AutoSize = true;
             this.lblLibraryBookRegistration.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lblLibraryBookRegistration.Location = new System.Drawing.Point(97, 54);
+            this.lblLibraryBookRegistration.Location = new System.Drawing.Point(162, 54);
             this.lblLibraryBookRegistration.Name = "lblLibraryBookRegistration";
             this.lblLibraryBookRegistration.Size = new System.Drawing.Size(290, 32);
             this.lblLibraryBookRegistration.TabIndex = 12;
@@ -121,9 +121,9 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(39, 355);
+            this.btnRegister.Location = new System.Drawing.Point(270, 272);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(404, 38);
+            this.btnRegister.Size = new System.Drawing.Size(148, 36);
             this.btnRegister.TabIndex = 4;
             this.btnRegister.Text = "&Register Book";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             // 
             this.dtpRegistration.Location = new System.Drawing.Point(39, 285);
             this.dtpRegistration.Name = "dtpRegistration";
-            this.dtpRegistration.Size = new System.Drawing.Size(200, 23);
+            this.dtpRegistration.Size = new System.Drawing.Size(212, 23);
             this.dtpRegistration.TabIndex = 3;
             this.dtpRegistration.ValueChanged += new System.EventHandler(this.dtpRegistration_ValueChanged);
             // 
@@ -143,7 +143,7 @@
             this.cbxBookTitle.FormattingEnabled = true;
             this.cbxBookTitle.Location = new System.Drawing.Point(39, 216);
             this.cbxBookTitle.Name = "cbxBookTitle";
-            this.cbxBookTitle.Size = new System.Drawing.Size(200, 23);
+            this.cbxBookTitle.Size = new System.Drawing.Size(379, 23);
             this.cbxBookTitle.TabIndex = 2;
             this.cbxBookTitle.SelectedIndexChanged += new System.EventHandler(this.cbxBookTitle_SelectedIndexChanged);
             // 
@@ -153,7 +153,7 @@
             this.cbxCustomerName.FormattingEnabled = true;
             this.cbxCustomerName.Location = new System.Drawing.Point(39, 147);
             this.cbxCustomerName.Name = "cbxCustomerName";
-            this.cbxCustomerName.Size = new System.Drawing.Size(200, 23);
+            this.cbxCustomerName.Size = new System.Drawing.Size(379, 23);
             this.cbxCustomerName.TabIndex = 1;
             this.cbxCustomerName.Tag = "";
             this.cbxCustomerName.SelectedIndexChanged += new System.EventHandler(this.cbxCustomerName_SelectedIndexChanged);
@@ -172,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 429);
+            this.ClientSize = new System.Drawing.Size(627, 346);
             this.Controls.Add(this.lblAuthors);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblBooks);

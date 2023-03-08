@@ -55,6 +55,7 @@
             this.lviBooks.TabIndex = 5;
             this.lviBooks.UseCompatibleStateImageBehavior = false;
             this.lviBooks.View = System.Windows.Forms.View.Details;
+            this.lviBooks.SelectedIndexChanged += new System.EventHandler(this.lviBooks_SelectedIndexChanged);
             // 
             // btnUpdateBook
             // 
@@ -64,6 +65,7 @@
             this.btnUpdateBook.TabIndex = 6;
             this.btnUpdateBook.Text = "&Update Book";
             this.btnUpdateBook.UseVisualStyleBackColor = true;
+            this.btnUpdateBook.Click += new System.EventHandler(this.btnUpdateBook_Click);
             // 
             // btnDeleteBook
             // 
@@ -73,6 +75,7 @@
             this.btnDeleteBook.TabIndex = 7;
             this.btnDeleteBook.Text = "&Delete Book";
             this.btnDeleteBook.UseVisualStyleBackColor = true;
+            this.btnDeleteBook.Click += new System.EventHandler(this.btnDeleteBook_Click);
             // 
             // lblNotice
             // 
@@ -100,6 +103,7 @@
             this.btnAddBook.TabIndex = 4;
             this.btnAddBook.Text = "&Add Book";
             this.btnAddBook.UseVisualStyleBackColor = true;
+            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
             // txtTitle
             // 
@@ -107,6 +111,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(295, 23);
             this.txtTitle.TabIndex = 3;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // lblTitle
             // 
@@ -123,6 +128,7 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(100, 23);
             this.txtPrice.TabIndex = 2;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // lblPrice
             // 
@@ -139,6 +145,7 @@
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(132, 23);
             this.txtISBN.TabIndex = 1;
+            this.txtISBN.TextChanged += new System.EventHandler(this.txtISBN_TextChanged);
             // 
             // lblISBN
             // 
