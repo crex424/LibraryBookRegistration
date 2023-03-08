@@ -111,6 +111,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(295, 23);
             this.txtTitle.TabIndex = 3;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // lblTitle
             // 
@@ -127,6 +128,7 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(100, 23);
             this.txtPrice.TabIndex = 2;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // lblPrice
             // 
@@ -143,6 +145,7 @@
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(132, 23);
             this.txtISBN.TabIndex = 1;
+            this.txtISBN.TextChanged += new System.EventHandler(this.txtISBN_TextChanged);
             // 
             // lblISBN
             // 

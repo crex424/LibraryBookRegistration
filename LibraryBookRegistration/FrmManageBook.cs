@@ -259,5 +259,47 @@ namespace LibraryBookRegistration
                 }
             }
         }
+        /// <summary>
+        /// Checks whether input is valid, if it is then enable Add Book button.
+        /// If it is not valid disable Add Book button.
+        /// </summary>
+        private void ToggleAddButton()
+        {
+            if (IsValidInput())
+            {
+                btnAddBook.Enabled = true;
+            }
+            else
+            {
+                btnAddBook.Enabled = false;
+            }
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtISBN_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
     }
 }
