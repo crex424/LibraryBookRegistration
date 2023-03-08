@@ -22,7 +22,14 @@ namespace LibraryBookRegistration
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            if (cbxCustomerName.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a customer to show available books to register!");
+                return;
+            }
 
+            Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
+            PopulateBookComboBox(selectedCus.CustomerID);
         }
 
         /// <summary>
@@ -87,7 +94,7 @@ namespace LibraryBookRegistration
 
             if (booksNotYetRegisterByCustomerID.Count == 0)
             {
-                MessageBox.Show("This customer has registered all available books!");
+                MessageBox.Show($"There are no books available for {CustomerDB.GetCustomer(customerID).FullName} to register!");
             }
         }
 
