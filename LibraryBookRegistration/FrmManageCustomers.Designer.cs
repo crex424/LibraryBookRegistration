@@ -104,6 +104,7 @@
             this.dtpDOB.Size = new System.Drawing.Size(200, 23);
             this.dtpDOB.TabIndex = 4;
             this.dtpDOB.Value = new System.DateTime(2023, 2, 18, 0, 0, 0, 0);
+            this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
             // 
             // lblDOB
             // 
@@ -120,6 +121,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(200, 23);
             this.txtLastName.TabIndex = 3;
+            this.txtLastName.TextChanged += new System.EventHandler(this.txtLastName_TextChanged);
             // 
             // lblLastName
             // 
@@ -136,6 +138,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(200, 23);
             this.txtFirstName.TabIndex = 2;
+            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // lblFirstName
             // 
@@ -152,6 +155,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(200, 23);
             this.txtTitle.TabIndex = 1;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // lblTitle
             // 
