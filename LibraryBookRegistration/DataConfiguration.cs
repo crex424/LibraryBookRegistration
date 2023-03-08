@@ -22,15 +22,6 @@ namespace LibraryBookRegistration
             return text;
         }
 
-        /// <summary>
-        /// Removes dashes from within a isbn
-        /// </summary>
-        /// <param name="isbn">A isbn in the form of a string</param>
-        /// <returns>A isbn string with dashes removed</returns>
-        public static string RemoveDashesFromISBN(string isbn)
-        {
-            return Regex.Replace(isbn, "-", "");
-        }
 
         /// <summary>
         /// fomalize a single/multiple-word name/title
