@@ -55,6 +55,7 @@
             this.lviCustomers.TabIndex = 6;
             this.lviCustomers.UseCompatibleStateImageBehavior = false;
             this.lviCustomers.View = System.Windows.Forms.View.Details;
+            this.lviCustomers.SelectedIndexChanged += new System.EventHandler(this.lviCustomers_SelectedIndexChanged);
             // 
             // btnUpdateCustomer
             // 

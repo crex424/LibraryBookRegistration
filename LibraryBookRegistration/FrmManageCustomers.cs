@@ -142,7 +142,6 @@ namespace LibraryBookRegistration
                 {
                     CustomerDB.Delete(customerID);
                     clearTextbox();
-                    lblErrMsg.Text = "";
                     MessageBox.Show($"'{currCus.FullName}' has been deleted succesfully!",
                                     "Successful!",
                                     MessageBoxButtons.OK,
@@ -178,6 +177,35 @@ namespace LibraryBookRegistration
             }
 
             PopulateCustomerListView();
+        }
+
+        private void lviCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // no item selected
+            if (lviCustomers.SelectedItems.Count == 0)
+            {
+                clearTextbox();
+                return;
+            }
+            else
+            {
+                // 1 item selected
+                if (lviCustomers.SelectedItems.Count == 1)
+                {
+                    ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
+                    txtTitle.Text = selectedCustomer.SubItems[1].Text;
+                    txtLastName.Text = selectedCustomer.SubItems[2].Text;
+                    txtFirstName.Text = selectedCustomer.SubItems[3].Text;
+                    dtpDOB.Value = DateTime.Parse(selectedCustomer.SubItems[4].Text);
+                    lblErrMsg.Text = "";
+                }
+
+                // more than 1 items selected
+                else
+                {
+                    clearTextbox();
+                }
+            }
         }
     }
 }
