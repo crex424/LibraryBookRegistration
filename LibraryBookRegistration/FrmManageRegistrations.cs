@@ -27,6 +27,8 @@ namespace LibraryBookRegistration
 
             // Section 2: Populates Listview to display all registrations
             PopulateRegistrationListView();
+            btnRemoveRegisteredBook.Enabled = false;
+            btnRemoveRegistration.Enabled= false;
         }
 
         /// <summary>
@@ -125,6 +127,43 @@ namespace LibraryBookRegistration
             ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
             int customerID = Convert.ToInt32(selectedCustomer.Text);
             PopulateBooksAndRegDateListView(customerID);
+        }
+        /// <summary>
+        /// When listView is selected this method is called.
+        /// If there is no selected items then the button to remove selected item
+        /// is disabled. If a item is selected then the button is enabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lviBooksAndRegDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lviBooksAndRegDate.SelectedItems.Count == 0)
+            {
+                btnRemoveRegisteredBook.Enabled = false;
+            }
+            else
+            {
+                btnRemoveRegisteredBook.Enabled = true;
+            }
+            
+        }
+        /// <summary>
+        /// When listView is selected this method is called.
+        /// If there is no selected items then the button to remove selected item
+        /// is disabled. If a item is selected then the button is enabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lviRegistrations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lviRegistrations.SelectedItems.Count == 0)
+            {
+                btnRemoveRegistration.Enabled = false;
+            }
+            else
+            {
+                btnRemoveRegistration.Enabled = true;
+            }
         }
     }
 }
