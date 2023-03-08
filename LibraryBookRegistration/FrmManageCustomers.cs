@@ -207,5 +207,32 @@ namespace LibraryBookRegistration
                 }
             }
         }
+
+        private void btnUpdateCustomer_Click(object sender, EventArgs e)
+        {
+            if (IsValidInput())
+            {
+                // get CustomerID from selected customer in listview
+                ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
+                int customerID = Convert.ToInt32(selectedCustomer.Text);
+
+                string title = DataConfiguration.FormalizeName(txtTitle.Text);
+                string firstName = DataConfiguration.FormalizeName(txtFirstName.Text);
+                string lastName = DataConfiguration.FormalizeName(txtLastName.Text);
+                DateTime dob = dtpDOB.Value.Date;
+
+                Customer updateCustomer = new(title, firstName, lastName, dob);
+                updateCustomer.CustomerID = customerID;
+
+                CustomerDB.Update(updateCustomer);
+                MessageBox.Show($"'{updateCustomer.FullName}' has been updated successfully!",
+                                "Successful!",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.None);
+
+                PopulateCustomerListView();
+                clearTextbox();
+            }
+        }
     }
 }
