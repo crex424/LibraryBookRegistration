@@ -122,7 +122,7 @@ namespace LibraryBookRegistration
                 {
                     if (!Validation.IsValidISBN(txtISBN.Text))
                     {
-                        lblErrMsg.Text = "ISBN should contain dashes and maximum 13 digits!";
+                        lblErrMsg.Text = "ISBN must be only number and have a maximum 13 digits!";
                     }
                     if (!double.TryParse(txtPrice.Text, out _))
                     {
