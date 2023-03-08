@@ -81,17 +81,17 @@ namespace LibraryBookRegistration
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.None);
                 PopulateBookListView();
-                clearTextbox();
+                ClearTextbox();
             }
         }
 
-        private void clearTextbox()
+        private void ClearTextbox()
         {
-            txtTitle.Text = "";
             txtISBN.Text = "";
             txtISBN.Focus();
-            txtPrice.Text = "";
-            lblErrMsg.Text = "";
+            txtTitle.Text = "";
+            txtPrice.Text = string.Empty;
+            txtISBN.Enabled = true;
         }
 
         /// <summary>
