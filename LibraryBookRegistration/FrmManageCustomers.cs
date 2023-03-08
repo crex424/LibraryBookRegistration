@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -122,6 +123,61 @@ namespace LibraryBookRegistration
             txtLastName.Text = "";
             dtpDOB.Value = DateTime.Today;
             lblErrMsg.Text = "";
+        }
+
+        private void btnDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            var selectedCustomers = lviCustomers.SelectedItems;
+
+            foreach (ListViewItem currItem in selectedCustomers)
+            {
+                int customerID = Convert.ToInt32(currItem.Text);
+
+                Customer currCus = CustomerDB.GetCustomer(customerID);
+
+                // count Registrations of selected Customer
+                int countRegistrationsByCustomerID = RegistrationDB.CountRegistrationsGroupByCustomerID(customerID);
+
+                try
+                {
+                    CustomerDB.Delete(customerID);
+                    clearTextbox();
+                    lblErrMsg.Text = "";
+                    MessageBox.Show($"'{currCus.FullName}' has been deleted succesfully!",
+                                    "Successful!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.None);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show($"'{currCus.FullName}' no longer exists",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    PopulateCustomerListView();
+                }
+                catch (SqlException)
+                {
+                    if (countRegistrationsByCustomerID > 0)
+                    {
+                        MessageBox.Show($"'{CustomerDB.GetCustomer(customerID).FullName}' already has Registrations. \n" +
+                                        $"Please remove all Registrations for '{currCus.FullName}' first!",
+                                        "Error!",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("We are having server issues. Please try again later!",
+                                        "Error!",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Exclamation);
+                    }
+                    clearTextbox();
+                }
+            }
+
+            PopulateCustomerListView();
         }
     }
 }

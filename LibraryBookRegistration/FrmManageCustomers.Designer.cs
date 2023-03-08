@@ -73,6 +73,7 @@
             this.btnDeleteCustomer.TabIndex = 8;
             this.btnDeleteCustomer.Text = "&Delete Customer";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // lblErrMsg
             // 
