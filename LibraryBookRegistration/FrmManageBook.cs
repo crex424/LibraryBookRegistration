@@ -72,5 +72,35 @@ namespace LibraryBookRegistration
                 clearTextbox();
             }
         }
+        /// <summary>
+        /// Validates Book input data
+        /// </summary>
+        /// <returns>True when all boxes a full, false if not full</returns>
+        private bool IsValidInput()
+        {
+            if (Validation.IsPresent(txtTitle) &&
+                Validation.IsPresent(txtISBN) &&
+                Validation.IsPresent(txtISBN) &&
+                Validation.IsValidISBN(txtISBN.Text))
+            {
+                lblErrMsg.Text = "";
+                return true;
+            }
+            else
+            {
+                if (!Validation.IsPresent(txtTitle) &&
+                    !Validation.IsPresent(txtISBN) &&
+                    !Validation.IsPresent(txtISBN))
+                {
+                    lblErrMsg.Text = "Please fill out all textboxes!";
+                    return false;
+                }
+                if (!Validation.IsValidISBN(txtISBN.Text))
+                {
+                    lblErrMsg.Text = "Please enter a valid ISBN!";
+                }
+                return false;
+            }
+        }
     }
 }
