@@ -36,6 +36,13 @@ namespace LibraryBookRegistration
             lviCustomers.Columns.Add("DateOfBirth", 100, HorizontalAlignment.Left);
 
             PopulateCustomerListView();
+
+            // disable tab index of some controls
+            lblCustomerForm.TabStop = false;
+            lblTitle.TabStop = false;
+            lblFirstName.TabStop = false;
+            lblLastName.TabStop = false;
+            lblDOB.TabStop = false;
         }
 
         /// <summary>
@@ -53,6 +60,13 @@ namespace LibraryBookRegistration
                 Tag = currCustomer;
                 lviCustomers.Items.Add(item);
             }
+
+            // onload or when re-populating listbox after user's activities 
+            // enable Add button
+            // Update button and Delete button are disabled until an item in listbox selected
+            btnAddCustomer.Enabled = false;
+            btnUpdateCustomer.Enabled = false;
+            btnDeleteCustomer.Enabled = false;
         }
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
@@ -184,6 +198,10 @@ namespace LibraryBookRegistration
             // no item selected
             if (lviCustomers.SelectedItems.Count == 0)
             {
+                // Update and Delete buttons off
+                btnUpdateCustomer.Enabled = false;
+                btnDeleteCustomer.Enabled = false;
+
                 clearTextbox();
                 return;
             }
@@ -192,6 +210,10 @@ namespace LibraryBookRegistration
                 // 1 item selected
                 if (lviCustomers.SelectedItems.Count == 1)
                 {
+                    // turn on Update and Delete buttons when 1 item selected
+                    btnUpdateCustomer.Enabled = true;
+                    btnDeleteCustomer.Enabled = true;
+
                     ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
                     txtTitle.Text = selectedCustomer.SubItems[1].Text;
                     txtLastName.Text = selectedCustomer.SubItems[2].Text;
@@ -203,6 +225,12 @@ namespace LibraryBookRegistration
                 // more than 1 items selected
                 else
                 {
+                    // when multiple items selected: users can delete more than 1 items but can't update multiple
+                    // turn off Update button
+                    // turn on Delete button
+                    btnUpdateCustomer.Enabled = false;
+                    btnDeleteCustomer.Enabled = true;
+
                     clearTextbox();
                 }
             }
@@ -233,6 +261,42 @@ namespace LibraryBookRegistration
                 PopulateCustomerListView();
                 clearTextbox();
             }
+        }
+
+        /// <summary>
+        /// Enable Add Customer Button when all input is valid
+        /// Disable when all conditions not met
+        /// </summary>
+        private void ToggleAddButton()
+        {
+            if (IsValidInput())
+            {
+                btnAddCustomer.Enabled = true;
+            }
+            else
+            {
+                btnAddCustomer.Enabled = false;
+            }
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+
+        private void txtLastName_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+
+        private void dtpDOB_ValueChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
         }
     }
 }
