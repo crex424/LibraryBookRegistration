@@ -30,6 +30,12 @@ namespace LibraryBookRegistration
 
 
             PopulateBookListView();
+
+            // disable tab index of some controls
+            lblBookForm.TabStop = false;
+            lblISBN.TabStop = false;
+            lblPrice.TabStop = false;
+            lblErrMsg.TabStop = false;
         }
         /// <summary>
         /// Populates the ListView with data from Book table
