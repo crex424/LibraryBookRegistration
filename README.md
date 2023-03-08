@@ -42,3 +42,5 @@ Requirements:
 - [Database file](LibraryBookRegistration.sql)
 
 ## Project Screenshots
+![Main form](https://user-images.githubusercontent.com/110303244/223782414-8576dd23-2fd4-4fab-bdf2-fe5efd023cf9.gif)
+
