@@ -42,7 +42,7 @@ namespace LibraryBookRegistration
 
             foreach (Book currBook in books)
             {
-                ListViewItem item = new(new[] { currBook.ISBN.ToString(), currBook.Title, currBook.Price.ToString() });
+                ListViewItem item = new(new[] { currBook.ISBN.ToString(), currBook.Title, currBook.Price.ToString("C")});
                 Tag = currBook;
                 lviBooks.Items.Add(item);
             }
