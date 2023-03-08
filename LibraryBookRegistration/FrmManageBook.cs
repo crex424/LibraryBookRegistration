@@ -46,6 +46,13 @@ namespace LibraryBookRegistration
                 Tag = currBook;
                 lviBooks.Items.Add(item);
             }
+            // onload or when re-populating listbox after user's activities 
+            // enable Add button
+            // Update button and Delete button are disabled until an item in listbox selected
+            txtISBN.Enabled = true;
+            btnAddBook.Enabled = true;
+            btnUpdateBook.Enabled = false;
+            btnDeleteBook.Enabled = false;
         }
         /// <summary>
         /// Adds valid book to database
