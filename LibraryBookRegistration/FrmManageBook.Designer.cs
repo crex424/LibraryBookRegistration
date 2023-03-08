@@ -55,6 +55,7 @@
             this.lviBooks.TabIndex = 5;
             this.lviBooks.UseCompatibleStateImageBehavior = false;
             this.lviBooks.View = System.Windows.Forms.View.Details;
+            this.lviBooks.SelectedIndexChanged += new System.EventHandler(this.lviBooks_SelectedIndexChanged);
             // 
             // btnUpdateBook
             // 
@@ -64,6 +65,7 @@
             this.btnUpdateBook.TabIndex = 6;
             this.btnUpdateBook.Text = "&Update Book";
             this.btnUpdateBook.UseVisualStyleBackColor = true;
+            this.btnUpdateBook.Click += new System.EventHandler(this.btnUpdateBook_Click);
             // 
             // btnDeleteBook
             // 
@@ -73,6 +75,7 @@
             this.btnDeleteBook.TabIndex = 7;
             this.btnDeleteBook.Text = "&Delete Book";
             this.btnDeleteBook.UseVisualStyleBackColor = true;
+            this.btnDeleteBook.Click += new System.EventHandler(this.btnDeleteBook_Click);
             // 
             // lblNotice
             // 
@@ -100,6 +103,7 @@
             this.btnAddBook.TabIndex = 4;
             this.btnAddBook.Text = "&Add Book";
             this.btnAddBook.UseVisualStyleBackColor = true;
+            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
             // txtTitle
             // 
