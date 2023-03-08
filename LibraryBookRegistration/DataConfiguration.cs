@@ -21,7 +21,29 @@ namespace LibraryBookRegistration
 
             return text;
         }
+        /// <summary>
+        /// Standardizes the ISBN
+        /// Removes dashes and white spaces
+        /// Adds prefix 0 to make 13 char length
+        /// </summary>
+        /// <param name="isbn">ISBN to make standard</param>
+        /// <returns>Standard ISBN</returns>
+        public static string ToStandardISBN(string isbn)
+        {
+            // remove all leading and trailing white-space characters
+            isbn = isbn.Trim();
 
+            // remove any dashes within the isbn
+            isbn = Regex.Replace(isbn, "-", "");
+
+            // add prefix 0 to ISBN if less than 13 digits
+            while (isbn.Length < 13)
+            {
+                isbn = "0" + isbn;
+            }
+
+            return isbn;
+        }
 
         /// <summary>
         /// fomalize a single/multiple-word name/title
