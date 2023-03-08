@@ -42,5 +42,10 @@ Requirements:
 - [Database file](LibraryBookRegistration.sql)
 
 ## Project Screenshots
-![Main form](https://user-images.githubusercontent.com/110303244/223782414-8576dd23-2fd4-4fab-bdf2-fe5efd023cf9.gif)
+![Main form](https://user-images.githubusercontent.com/36382100/223859661-41b56f55-2a4f-499c-89e3-f32de549fa61.gif)
 
+![Registration Managing Form](https://user-images.githubusercontent.com/36382100/223859340-067fa5df-1aa5-497b-895e-3c6f5d8ed4ef.jpg)
+
+![Book Managing Form](https://user-images.githubusercontent.com/36382100/223859395-16b0b447-0c29-4b55-a5b2-9c0276ec7d62.jpg)
+
+![Customer Managing Form](https://user-images.githubusercontent.com/36382100/223859463-e806b206-e680-4010-9296-25e779771b3b.jpg)
