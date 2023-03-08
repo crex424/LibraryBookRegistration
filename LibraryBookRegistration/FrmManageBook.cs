@@ -98,7 +98,7 @@ namespace LibraryBookRegistration
         /// <summary>
         /// Validates Book input data
         /// </summary>
-        /// <returns>True when all boxes a full, false if not full</returns>
+        /// <returns>True when all boxes a full and valid, false if not full or valid</returns>
         private bool IsValidInput()
         {
             // all textboxes are filled
@@ -134,6 +134,94 @@ namespace LibraryBookRegistration
             lblErrMsg.Text = "All textboxes shouldn't be empty!";
             return false;
         }
+        /// <summary>
+        /// Deletes selected book from database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteBook_Click(object sender, EventArgs e)
+        {
+            var selectedBooks = lviBooks.SelectedItems;
+
+            foreach (ListViewItem currItem in selectedBooks)
+            {
+                // Book currBook = new(currItem.Text, currItem.SubItems[1].Text, Convert.ToDouble(currItem.SubItems[2].Text.Substring(1)));
+                string isbn = currItem.Text;
+                Book currBook = BookDB.GetBook(isbn);
+                // count Registrations of selected Book
+                int countRegistrationsGroupByISBN = RegistrationDB.CountRegistrationsGroupByISBN(currBook.ISBN);
+
+                try
+                {
+                    BookDB.Delete(currBook);
+                    ClearTextbox();
+                    lblErrMsg.Text = "";
+                    MessageBox.Show($"'{currBook.Title}' has been deleted succesfully!",
+                                    "Successful!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.None);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show($"'{currBook.Title}' no longer exists",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    PopulateBookListView();
+                }
+                catch (SqlException)
+                {
+                    if (countRegistrationsGroupByISBN > 0)
+                    {
+                        MessageBox.Show($"'{currBook.Title}' already has Registrations. \n" +
+                                        $"Please remove all Registrations for '{currBook.Title}' first!",
+                                        "Error!",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("We are having server issues. Please try again later!",
+                                        "Error!",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Exclamation);
+                    }
+                    ClearTextbox();
+                }
+            }
+
+            PopulateBookListView();
+        }
+        /// <summary>
+        /// Updates selected book's data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdateBook_Click(object sender, EventArgs e)
+        {
+            if (IsValidInput())
+            {
+                string isbn = DataConfiguration.RemoveDashesFromISBN(DataConfiguration.RemoveAllWhiteSpace(txtISBN.Text));
+                double price = Convert.ToDouble(txtPrice.Text);
+                string title = DataConfiguration.FormalizeName(txtTitle.Text);
+
+                Book updateBook = new(isbn, title, price);
+
+                BookDB.Update(updateBook);
+                MessageBox.Show($"'{updateBook.Title}' has been updated successfully!",
+                                "Successful!",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.None);
+
+                PopulateBookListView();
+                ClearTextbox();
+            }
+        }
+        /// <summary>
+        /// Displays selected books data in txtBoxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lviBooks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lviBooks.SelectedItems.Count == 0)
