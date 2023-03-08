@@ -107,6 +107,7 @@
             this.lviRegistrations.TabIndex = 4;
             this.lviRegistrations.UseCompatibleStateImageBehavior = false;
             this.lviRegistrations.View = System.Windows.Forms.View.Details;
+            this.lviRegistrations.SelectedIndexChanged += new System.EventHandler(this.lviRegistrations_SelectedIndexChanged);
             // 
             // btnRemoveRegistration
             // 

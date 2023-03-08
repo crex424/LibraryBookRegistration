@@ -130,7 +130,7 @@ namespace LibraryBookRegistration
         }
         /// <summary>
         /// When listView is selected this method is called.
-        /// If there is no selected items then the button the remove reg books
+        /// If there is no selected items then the button to remove selected item
         /// is disabled. If a item is selected then the button is enabled.
         /// </summary>
         /// <param name="sender"></param>
@@ -143,7 +143,26 @@ namespace LibraryBookRegistration
             }
             else
             {
-                btnRemoveRegisteredBook.Enabled = false;
+                btnRemoveRegisteredBook.Enabled = true;
+            }
+            
+        }
+        /// <summary>
+        /// When listView is selected this method is called.
+        /// If there is no selected items then the button to remove selected item
+        /// is disabled. If a item is selected then the button is enabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lviRegistrations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lviRegistrations.SelectedItems.Count == 0)
+            {
+                btnRemoveRegistration.Enabled = false;
+            }
+            else
+            {
+                btnRemoveRegistration.Enabled = true;
             }
         }
     }
