@@ -5,8 +5,9 @@ namespace LibraryBookRegistration
         public FrmLibraryBookRegistration()
         {
             InitializeComponent();
-            titleBlink();
+            _ = titleBlink();
         }
+
         /// <summary>
         /// When the form loads this method will be called.
         /// Currently this method when called will populate 
@@ -144,17 +145,7 @@ namespace LibraryBookRegistration
             newManageBookForm.ShowDialog();
         }
 
-        private void cbxCustomerName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxCustomerName.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a customer to show available books to register!");
-                return;
-            }
-
-            Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
-            PopulateBookComboBox(selectedCus.CustomerID);
-        }
+        
 
         /// <summary>
         /// Clears input 
@@ -165,6 +156,7 @@ namespace LibraryBookRegistration
             PopulateBookComboBox();
             lblErrMsg.Text = "";
             dtpRegistration.Value = DateTime.Today;
+            ToggleRegisterButton();
         }
 
         /// <summary>
@@ -205,6 +197,19 @@ namespace LibraryBookRegistration
             {
                 btnRegister.Enabled = false;
             }
+        }
+
+        private void cbxCustomerName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ToggleRegisterButton();
+            if (cbxCustomerName.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a customer to show available books to register!");
+                return;
+            }
+
+            Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
+            PopulateBookComboBox(selectedCus.CustomerID);
         }
 
         private void cbxBookTitle_SelectedIndexChanged(object sender, EventArgs e)

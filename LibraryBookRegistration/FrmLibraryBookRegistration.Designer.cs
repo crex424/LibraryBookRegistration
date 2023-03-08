@@ -172,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 346);
+            this.ClientSize = new System.Drawing.Size(627, 365);
             this.Controls.Add(this.lblAuthors);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblBooks);
