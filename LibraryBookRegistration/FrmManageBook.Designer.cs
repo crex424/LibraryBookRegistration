@@ -55,6 +55,7 @@
             this.lviBooks.TabIndex = 5;
             this.lviBooks.UseCompatibleStateImageBehavior = false;
             this.lviBooks.View = System.Windows.Forms.View.Details;
+            this.lviBooks.SelectedIndexChanged += new System.EventHandler(this.lviBooks_SelectedIndexChanged);
             // 
             // btnUpdateBook
             // 
