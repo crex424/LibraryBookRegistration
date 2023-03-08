@@ -57,7 +57,7 @@ namespace LibraryBookRegistration
             // enable Add button
             // Update button and Delete button are disabled until an item in listbox selected
             txtISBN.Enabled = true;
-            btnAddBook.Enabled = true;
+            btnAddBook.Enabled = false;
             btnUpdateBook.Enabled = false;
             btnDeleteBook.Enabled = false;
         }
@@ -93,6 +93,7 @@ namespace LibraryBookRegistration
             txtTitle.Text = "";
             txtPrice.Text = string.Empty;
             txtISBN.Enabled = true;
+            lblErrMsg.Text = "";
         }
 
         /// <summary>
@@ -155,7 +156,6 @@ namespace LibraryBookRegistration
                 {
                     BookDB.Delete(currBook);
                     ClearTextbox();
-                    lblErrMsg.Text = "";
                     MessageBox.Show($"'{currBook.Title}' has been deleted succesfully!",
                                     "Successful!",
                                     MessageBoxButtons.OK,
@@ -229,15 +229,8 @@ namespace LibraryBookRegistration
                 // MessageBox.Show("Please add or select a Book to update or delete!");
                 btnDeleteBook.Enabled = false;
                 btnUpdateBook.Enabled = false;
-                btnAddBook.Enabled = true;
                 ClearTextbox();
 
-                /* this code to use with checkboxes
-                foreach (ListViewItem currItem in lviBooks.Items)
-                {
-                    currItem.Checked = false;
-                }
-                */
                 return;
             }
             else
@@ -246,22 +239,67 @@ namespace LibraryBookRegistration
                 if (lviBooks.SelectedItems.Count == 1)
                 {
                     btnUpdateBook.Enabled = true;
+                    btnDeleteBook.Enabled = true;
+
                     txtISBN.Enabled = false;
                     ListViewItem selectedBook = lviBooks.SelectedItems[0];
                     txtISBN.Text = selectedBook.Text;
                     txtTitle.Text = selectedBook.SubItems[1].Text;
                     txtPrice.Text = selectedBook.SubItems[2].Text.Substring(1);
+                    lblErrMsg.Text = "";
                 }
 
                 // disable Update button when multiple items are selected
                 else
                 {
                     btnUpdateBook.Enabled = false;
+                    btnDeleteBook.Enabled = true;
+
                     ClearTextbox();
                 }
-                btnDeleteBook.Enabled = true;
+            }
+        }
+        /// <summary>
+        /// Checks whether input is valid, if it is then enable Add Book button.
+        /// If it is not valid disable Add Book button.
+        /// </summary>
+        private void ToggleAddButton()
+        {
+            if (IsValidInput())
+            {
+                btnAddBook.Enabled = true;
+            }
+            else
+            {
                 btnAddBook.Enabled = false;
             }
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtISBN_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
+        }
+        /// <summary>
+        /// When text is changed this method is called
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+            ToggleAddButton();
         }
     }
 }
