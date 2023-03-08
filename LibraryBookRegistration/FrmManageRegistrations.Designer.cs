@@ -63,6 +63,7 @@
             this.lviBooksAndRegDate.TabIndex = 2;
             this.lviBooksAndRegDate.UseCompatibleStateImageBehavior = false;
             this.lviBooksAndRegDate.View = System.Windows.Forms.View.Details;
+            this.lviBooksAndRegDate.SelectedIndexChanged += new System.EventHandler(this.lviBooksAndRegDate_SelectedIndexChanged);
             // 
             // lviCustomers
             // 
