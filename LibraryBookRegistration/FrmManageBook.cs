@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 
 namespace LibraryBookRegistration
 {
@@ -48,7 +49,7 @@ namespace LibraryBookRegistration
 
             foreach (Book currBook in books)
             {
-                ListViewItem item = new(new[] { currBook.ISBN.ToString(), currBook.Title, currBook.Price.ToString("C")});
+                ListViewItem item = new(new[] { currBook.ISBN.ToString(), currBook.Title, currBook.Price.ToString("C") });
                 Tag = currBook;
                 lviBooks.Items.Add(item);
             }
@@ -100,28 +101,78 @@ namespace LibraryBookRegistration
         /// <returns>True when all boxes a full, false if not full</returns>
         private bool IsValidInput()
         {
-            if (Validation.IsPresent(txtTitle) &&
-                Validation.IsPresent(txtISBN) &&
-                Validation.IsPresent(txtISBN) &&
-                Validation.IsValidISBN(txtISBN.Text))
+            // all textboxes are filled
+            if (Validation.IsPresent(txtISBN) &&
+                Validation.IsPresent(txtTitle) &&
+                Validation.IsPresent(txtPrice))
             {
-                lblErrMsg.Text = "";
-                return true;
+                // ISBN is valid and not existed, and price is a number
+                if (Validation.IsValidISBN(txtISBN.Text) &&
+                    double.TryParse(txtPrice.Text, out double price))
+                {
+                    if (price < 0)
+                    {
+                        lblErrMsg.Text = "Price should be greater than or equal to 0!";
+                        return false;
+                    }
+                    lblErrMsg.Text = "";
+                    return true;
+                }
+                else
+                {
+                    if (!Validation.IsValidISBN(txtISBN.Text))
+                    {
+                        lblErrMsg.Text = "ISBN should contain dashes and maximum 13 digits!";
+                    }
+                    if (!double.TryParse(txtPrice.Text, out _))
+                    {
+                        lblErrMsg.Text = "Price should be a number!";
+                    }
+                    return false;
+                }
+            }
+            lblErrMsg.Text = "All textboxes shouldn't be empty!";
+            return false;
+        }
+        private void lviBooks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lviBooks.SelectedItems.Count == 0)
+            {
+                // MessageBox.Show("Please add or select a Book to update or delete!");
+                btnDeleteBook.Enabled = false;
+                btnUpdateBook.Enabled = false;
+                btnAddBook.Enabled = true;
+                ClearTextbox();
+
+                /* this code to use with checkboxes
+                foreach (ListViewItem currItem in lviBooks.Items)
+                {
+                    currItem.Checked = false;
+                }
+                */
+                return;
             }
             else
             {
-                if (!Validation.IsPresent(txtTitle) &&
-                    !Validation.IsPresent(txtISBN) &&
-                    !Validation.IsPresent(txtISBN))
+                // enable Update and Delete buttons when 1 item is selected
+                if (lviBooks.SelectedItems.Count == 1)
                 {
-                    lblErrMsg.Text = "Please fill out all textboxes!";
-                    return false;
+                    btnUpdateBook.Enabled = true;
+                    txtISBN.Enabled = false;
+                    ListViewItem selectedBook = lviBooks.SelectedItems[0];
+                    txtISBN.Text = selectedBook.Text;
+                    txtTitle.Text = selectedBook.SubItems[1].Text;
+                    txtPrice.Text = selectedBook.SubItems[2].Text.Substring(1);
                 }
-                if (!Validation.IsValidISBN(txtISBN.Text))
+
+                // disable Update button when multiple items are selected
+                else
                 {
-                    lblErrMsg.Text = "Please enter a valid ISBN!";
+                    btnUpdateBook.Enabled = false;
+                    ClearTextbox();
                 }
-                return false;
+                btnDeleteBook.Enabled = true;
+                btnAddBook.Enabled = false;
             }
         }
     }
