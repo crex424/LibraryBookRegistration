@@ -64,11 +64,10 @@ namespace LibraryBookRegistration
             if (IsValidInput())
             {
                 string title = DataConfiguration.FormalizeName(txtTitle.Text);
-                string isbn = DataConfiguration.RemoveDashesFromISBN(DataConfiguration
-                                               .RemoveAllWhiteSpace(txtISBN.Text));
-                double price = Convert.ToDouble(DataConfiguration.RemoveAllWhiteSpace(txtPrice.Text));
+                string isbn = DataConfiguration.RemoveDashesFromISBN(DataConfiguration.RemoveAllWhiteSpace(txtISBN.Text));
+                double price = Convert.ToDouble(txtPrice.Text);
 
-                Book newBook = new(title, isbn, price);
+                Book newBook = new Book(isbn, title, price);
 
                 BookDB.Add(newBook);
                 MessageBox.Show($"'{newBook.Title}' has been added successfully",
@@ -83,8 +82,8 @@ namespace LibraryBookRegistration
         private void clearTextbox()
         {
             txtTitle.Text = "";
-            txtTitle.Focus();
             txtISBN.Text = "";
+            txtISBN.Focus();
             txtPrice.Text = "";
             lblErrMsg.Text = "";
         }
