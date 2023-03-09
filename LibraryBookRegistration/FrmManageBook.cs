@@ -45,7 +45,7 @@ namespace LibraryBookRegistration
         {
             lviBooks.Items.Clear();
 
-            List<Book> books = BookDB.GetAllValidBooks();
+            List<Book> books = BookDB.GetAllBooks();
 
             foreach (Book currBook in books)
             {
@@ -265,12 +265,16 @@ namespace LibraryBookRegistration
         /// </summary>
         private void ToggleAddButton()
         {
-            if (IsValidInput())
+            bool v = Validation.IsExistedISBN(DataConfiguration.
+                                 RemoveDashesFromISBN(DataConfiguration.RemoveAllWhiteSpace(txtISBN.Text)));
+            if (IsValidInput() && v != false)
             {
+                lblErrMsg.Text = "";
                 btnAddBook.Enabled = true;
             }
             else
             {
+                lblErrMsg.Text = "Please enter a valid book, or new book!";
                 btnAddBook.Enabled = false;
             }
         }
