@@ -45,7 +45,7 @@ namespace LibraryBookRegistration
         {
             lviBooks.Items.Clear();
 
-            List<Book> books = BookDB.GetAllValidBooks();
+            List<Book> books = BookDB.GetAllBooks();
 
             foreach (Book currBook in books)
             {
