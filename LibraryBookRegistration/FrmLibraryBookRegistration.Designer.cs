@@ -135,6 +135,7 @@
             this.dtpRegistration.Name = "dtpRegistration";
             this.dtpRegistration.Size = new System.Drawing.Size(212, 23);
             this.dtpRegistration.TabIndex = 3;
+            this.dtpRegistration.ValueChanged += new System.EventHandler(this.dtpRegistration_ValueChanged);
             // 
             // cbxBookTitle
             // 
@@ -144,6 +145,7 @@
             this.cbxBookTitle.Name = "cbxBookTitle";
             this.cbxBookTitle.Size = new System.Drawing.Size(379, 23);
             this.cbxBookTitle.TabIndex = 2;
+            this.cbxBookTitle.SelectedIndexChanged += new System.EventHandler(this.cbxBookTitle_SelectedIndexChanged);
             // 
             // cbxCustomerName
             // 
@@ -170,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 346);
+            this.ClientSize = new System.Drawing.Size(627, 365);
             this.Controls.Add(this.lblAuthors);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblBooks);

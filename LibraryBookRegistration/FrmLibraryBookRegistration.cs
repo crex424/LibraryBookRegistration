@@ -5,8 +5,9 @@ namespace LibraryBookRegistration
         public FrmLibraryBookRegistration()
         {
             InitializeComponent();
-            titleBlink();
+            _ = titleBlink();
         }
+
         /// <summary>
         /// When the form loads this method will be called.
         /// Currently this method when called will populate 
@@ -16,26 +17,46 @@ namespace LibraryBookRegistration
         /// <param name="e"></param>
         private void FrmLibraryBookRegistration_Load(object sender, EventArgs e)
         {
-            PopulateCustomerComboBox();
-            PopulateBookComboBox();
+            resetForm();
+
+            // disable tab index of some controls
+            lblCustomers.TabStop = false;
+            lblBooks.TabStop = false;
+            lblDate.TabStop = false;
+            lblLibraryBookRegistration.TabStop = false;
+            lblErrMsg.TabStop = false;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (cbxCustomerName.SelectedIndex == -1)
+            // make sure users select a customer and a book to register
+            if (cbxCustomerName.SelectedIndex == -1 ||
+                cbxBookTitle.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a customer to show available books to register!");
+                MessageBox.Show("Please select a customer and a book to register!");
                 return;
             }
 
             Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
-            PopulateBookComboBox(selectedCus.CustomerID);
+            Book selectedBook = (Book)cbxBookTitle.SelectedItem;
+            DateTime regDate = dtpRegistration.Value;
+
+            Registration newReg = new Registration(selectedCus.CustomerID, selectedBook.ISBN, regDate);
+
+            bool result = RegistrationDB.RegisterBook(newReg);
+            if (!result)
+            {
+                MessageBox.Show("We are having server issues. Please try again later!");
+            }
+            MessageBox.Show($"Registration of '{selectedCus.FullName}' for '{selectedBook.Title}' has been addded succesfully!");
+
+            resetForm();
         }
 
         /// <summary>
         /// makes the application title blink
         /// </summary>
-        private async void titleBlink()
+        private async Task titleBlink()
         {
             while (true)
             {
@@ -59,6 +80,7 @@ namespace LibraryBookRegistration
                 cbxCustomerName.Items.Add(currCus);
             }
         }
+
         /// <summary>
         /// Populates Customer ComboBox - DropDown List
         /// </summary>
@@ -123,8 +145,63 @@ namespace LibraryBookRegistration
             newManageBookForm.ShowDialog();
         }
 
+        
+
+        /// <summary>
+        /// Clears input 
+        /// </summary>
+        private void resetForm()
+        {
+            PopulateCustomerComboBox();
+            PopulateBookComboBox();
+            lblErrMsg.Text = "";
+            dtpRegistration.Value = DateTime.Today;
+            ToggleRegisterButton();
+        }
+
+        /// <summary>
+        /// Validates input date
+        /// </summary>
+        /// <returns>True when all input is valid</returns>
+        private bool IsValid()
+        {
+            if (cbxCustomerName.SelectedIndex != -1 &&
+                cbxBookTitle.SelectedIndex != -1 &&
+                dtpRegistration.Value >= DateTime.Today)
+            {
+                lblErrMsg.Text = "";
+                return true;
+            }
+            else
+            {
+                if (dtpRegistration.Value < DateTime.Today)
+                {
+                    lblErrMsg.Text = "Date can't be in the past!";
+                }
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Enable Register Book Button when all input is valid
+        /// Disable when all conditions not met
+        /// </summary>
+        private void ToggleRegisterButton()
+        {
+            if (IsValid())
+            {
+                btnRegister.Enabled = true;
+            }
+            else
+            {
+                btnRegister.Enabled = false;
+            }
+        }
+
         private void cbxCustomerName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ToggleRegisterButton();
             if (cbxCustomerName.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a customer to show available books to register!");
@@ -133,6 +210,16 @@ namespace LibraryBookRegistration
 
             Customer selectedCus = (Customer)cbxCustomerName.SelectedItem;
             PopulateBookComboBox(selectedCus.CustomerID);
+        }
+
+        private void cbxBookTitle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ToggleRegisterButton();
+        }
+
+        private void dtpRegistration_ValueChanged(object sender, EventArgs e)
+        {
+            ToggleRegisterButton();
         }
     }
 }
