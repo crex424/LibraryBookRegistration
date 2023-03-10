@@ -83,8 +83,9 @@
             this.btnRemoveRegisteredBook.Name = "btnRemoveRegisteredBook";
             this.btnRemoveRegisteredBook.Size = new System.Drawing.Size(161, 23);
             this.btnRemoveRegisteredBook.TabIndex = 3;
-            this.btnRemoveRegisteredBook.Text = "Remove Registered &Book";
+            this.btnRemoveRegisteredBook.Text = "Remove Registered &Book(s)";
             this.btnRemoveRegisteredBook.UseVisualStyleBackColor = true;
+            this.btnRemoveRegisteredBook.Click += new System.EventHandler(this.btnRemoveRegisteredBook_Click);
             // 
             // grbRegistrations
             // 
@@ -115,8 +116,9 @@
             this.btnRemoveRegistration.Name = "btnRemoveRegistration";
             this.btnRemoveRegistration.Size = new System.Drawing.Size(141, 23);
             this.btnRemoveRegistration.TabIndex = 5;
-            this.btnRemoveRegistration.Text = "Remove &Registration";
+            this.btnRemoveRegistration.Text = "Remove &Registration(s)";
             this.btnRemoveRegistration.UseVisualStyleBackColor = true;
+            this.btnRemoveRegistration.Click += new System.EventHandler(this.btnRemoveRegistration_Click);
             // 
             // lblRegistrationManagingTool
             // 

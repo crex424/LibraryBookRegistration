@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,13 +23,13 @@ namespace LibraryBookRegistration
             // Section 1 + 2: Creates columns for Listviews
             CreateListViewColumns();
 
-            // Section 1: Populates Listview to display Customers who have registration(s)
-            PopulateCustomerListView();
+            ResetListViews();
 
-            // Section 2: Populates Listview to display all registrations
-            PopulateRegistrationListView();
-            btnRemoveRegisteredBook.Enabled = false;
-            btnRemoveRegistration.Enabled= false;
+            // disable tab index of label controls
+            lblRegistrationManagingTool.TabStop = false;
+            grbCustomersAndBooks.TabStop = false;
+            grbRegistrations.TabStop = false;
+            
         }
 
         /// <summary>
@@ -128,6 +129,7 @@ namespace LibraryBookRegistration
             int customerID = Convert.ToInt32(selectedCustomer.Text);
             PopulateBooksAndRegDateListView(customerID);
         }
+
         /// <summary>
         /// When listView is selected this method is called.
         /// If there is no selected items then the button to remove selected item
@@ -164,6 +166,98 @@ namespace LibraryBookRegistration
             {
                 btnRemoveRegistration.Enabled = true;
             }
+        }
+
+       
+        private void btnRemoveRegistration_Click(object sender, EventArgs e)
+        {
+            var selectedRegs = lviRegistrations.SelectedItems;
+
+            foreach (ListViewItem currItem in selectedRegs)
+            {
+                int customerID = Convert.ToInt32(currItem.Text);
+                string isbn = currItem.SubItems[2].Text;
+
+                try
+                {
+                    RegistrationDB.Delete(customerID, isbn);
+                    MessageBox.Show($"Registration of '{CustomerDB.GetCustomer(customerID).FullName}' \n" +
+                                    $"for '{BookDB.GetBook(isbn).Title}' has been removed succesfully!",
+                                    "Successful!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.None);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show($"Registration of '{CustomerDB.GetCustomer(customerID).FullName}' \n" +
+                                    $"for '{BookDB.GetBook(isbn).Title}' no longer exists",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+
+                    ResetListViews();
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("We are having server issues. Please try again later!",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Exclamation);
+                }
+            }
+
+            ResetListViews();
+            lviRegistrations.Focus();
+        }
+
+        private void ResetListViews()
+        {
+            PopulateRegistrationListView();
+            PopulateCustomerListView();
+            lviBooksAndRegDate.Items.Clear();
+            btnRemoveRegisteredBook.Enabled = false;
+            btnRemoveRegistration.Enabled = false;
+        }
+
+        private void btnRemoveRegisteredBook_Click(object sender, EventArgs e)
+        {
+            ListViewItem selectedCustomer = lviCustomers.SelectedItems[0];
+            int customerID = Convert.ToInt32(selectedCustomer.Text);
+
+            var selectedBooks = lviBooksAndRegDate.SelectedItems;
+
+            foreach (ListViewItem currItem in selectedBooks)
+            {
+                string isbn = currItem.Text;
+                try
+                {
+                    RegistrationDB.Delete(customerID, isbn);
+                    MessageBox.Show($"Registration of '{CustomerDB.GetCustomer(customerID).FullName}' \n" +
+                                    $"for '{BookDB.GetBook(isbn).Title}' has been removed succesfully!",
+                                    "Successful!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.None);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show($"Registration of '{CustomerDB.GetCustomer(customerID).FullName}' \n" +
+                                    $"for '{BookDB.GetBook(isbn).Title}' no longer exists",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    ResetListViews();
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("We are having server issues. Please try again later!",
+                                    "Error!",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Exclamation);
+                }
+            }
+
+            ResetListViews();
+            lviRegistrations.Focus();
         }
     }
 }
