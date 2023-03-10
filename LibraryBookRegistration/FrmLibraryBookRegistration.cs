@@ -110,6 +110,8 @@ namespace LibraryBookRegistration
 
             foreach (Book currBook in booksNotYetRegisterByCustomerID)
             {
+                currBook.ISBN = DataConfiguration.RemoveAllWhiteSpace(currBook.ISBN);
+                currBook.ISBN = DataConfiguration.RemoveDashesFromISBN(currBook.ISBN);
                 // Add entire book object to combo box
                 cbxBookTitle.Items.Add(currBook);
             }
